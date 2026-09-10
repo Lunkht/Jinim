@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c0f13"/><stop offset="0.6" stop-color="#07090c"/><stop offset="1" stop-color="#040404"/>
+    </linearGradient>
+    <radialGradient id="haze" cx="0.45" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#33404d" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#33404d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#haze)"/>
+  <g stroke="#1b2731" stroke-width="1">
+    <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="620" x2="1200" y2="620"/>
+    <line x1="300" y1="0" x2="300" y2="800"/><line x1="830" y1="0" x2="830" y2="800"/>
+  </g>
+  <g fill="#3c4c5a" stroke="#4d5f70" stroke-width="1.5">
+    <path d="M420 300l-30-40-24 6 36 44z"/>
+    <path d="M500 258l-4-52-24-10-30 45z"/>
+    <path d="M420 380l-30 40-24-6 36-44z"/>
+    <path d="M500 422l-4 52-24 10-30-45z"/>
+    <circle cx="360" cy="218" r="16" fill="none"/>
+    <circle cx="452" cy="208" r="16" fill="none"/>
+    <circle cx="360" cy="462" r="16" fill="none"/>
+    <circle cx="452" cy="472" r="16" fill="none"/>
+    <path d="M460 300l-20 0 4-24 12 0z" fill="#4d5f70"/>
+    <rect x="444" y="320" width="34" height="56" rx="6" fill="#2c3944"/>
+    <rect x="450" y="376" width="22" height="10" rx="3" fill="#4d5f70"/>
+    <path d="M400 296 L438 300" stroke="#52677c" stroke-width="2"/>
+  </g>
+  <g stroke="#2b3947" stroke-width="2" fill="none" stroke-linecap="round">
+    <path d="M820 560l-120-26 96-28z"/>
+    <path d="M960 700l-180 8zm-20 40l-160 8z"/>
+  </g>
+  <rect width="1200" height="800" fill="url(#vig)"/>
+</svg>

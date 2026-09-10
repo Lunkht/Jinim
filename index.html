@@ -3,163 +3,286 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jinim — Le système d'exploitation souverain pour l'IA appliquée</title>
+<title id="pageTitle">Jimin — L'équipement qui protège et soigne</title>
+<meta name="description" id="metaDesc" content="Jimin développe les équipements d'urgence qui protègent et soignent : drones de reconnaissance et de surveillance, caméras fixes et corporelles, soins rapides pour les troupes et les civils.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="#" class="logo" aria-label="Jinim">
-      <img src="assets/jinim-logo.svg" alt="Jinim">
+<header class="navbar" id="navbar">
+  <div class="nav-wrap">
+    <a class="logo" href="#top" aria-label="Jimin">
+      <img src="assets/jinim-logo.svg" alt="Jimin">
     </a>
-    <ul class="nav-links">
-      <li><a href="#platform">Plateforme</a></li>
-      <li><a href="#architecture">Architecture</a></li>
-      <li><a href="#industries">Secteurs</a></li>
-      <li><a href="#ecosystem">Écosystème</a></li>
-      <li><a href="#deploy">Déploiement</a></li>
-    </ul>
-    <div class="nav-cta">
-      <button class="btn btn-ghost" onclick="openModal()">Demander une démo</button>
-      <button class="burger" aria-label="Menu" onclick="document.querySelector('.nav-links').style.display='flex'">
+
+    <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
+      <ul class="nav-list">
+        <li>
+          <button class="nav-mega-trigger" data-menu-id="menu-products" aria-expanded="false" aria-haspopup="true">
+            <span data-i18n="nav.products">Produits</span>
+            <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+        <li>
+          <button class="nav-mega-trigger" data-menu-id="menu-industries" aria-expanded="false" aria-haspopup="true">
+            <span data-i18n="nav.industries">Industries</span>
+            <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </li>
+        <li><a href="#mission"><span data-i18n="nav.mission">Notre mission</span></a></li>
+        <li><a href="#news"><span data-i18n="nav.news">Actualités</span></a></li>
+        <li><a href="#investors"><span data-i18n="nav.investors">Investisseurs</span></a></li>
+        <li><a href="#careers"><span data-i18n="nav.careers">Carrières</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch to English">EN</button>
+      <a class="btn btn-ghost" href="#demo" onclick="openModal()" data-i18n="nav.demo">Demander une démo</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </nav>
+  </div>
+
+  <div class="mega" data-menu-id="menu-products">
+    <div class="mega-inner">
+      <button class="mega-back" data-menu-back type="button"><span class="mega-back-icon">←</span><span data-i18n="nav.back">Retour</span></button>
+      <div class="mega-cols">
+        <div class="mega-intro">
+          <div class="sub-title" data-i18n="mega.products.cat">Produits</div>
+          <h3 class="mega-title" data-i18n="mega.products.title">Équiper ceux qui protègent et soignent</h3>
+          <p class="mega-desc" data-i18n="mega.products.desc">Trois familles d'équipements critiques, pensées pour la première ligne.</p>
+          <a class="btn btn-outline btn-sm" href="#products"><span data-i18n="mega.products.cta">Voir tous les produits</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="mega-group">
+          <div class="mega-head" data-i18n="mega.products.g1">Drones</div>
+          <ul class="mega-list">
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g1.l1">Reconnaissance ISR</span></a></li>
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g1.l2">Surveillance continue</span></a></li>
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g1.l3">Protection de site</span></a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-head" data-i18n="mega.products.g2">Caméras & capteurs</div>
+          <ul class="mega-list">
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g2.l1">Caméras de surveillance</span></a></li>
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g2.l2">Caméras corporelles</span></a></li>
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g2.l3">Vision thermique & nocturne</span></a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-head" data-i18n="mega.products.g3">Médical</div>
+          <ul class="mega-list">
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g3.l1">Soins rapides de combat</span></a></li>
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g3.l2">Secours civils</span></a></li>
+            <li><a href="#products"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.products.g3.l3">Kits & dispositifs d'urgence</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mega" data-menu-id="menu-industries">
+    <div class="mega-inner">
+      <button class="mega-back" data-menu-back type="button"><span class="mega-back-icon">←</span><span data-i18n="nav.back">Retour</span></button>
+      <div class="mega-cols">
+        <div class="mega-intro">
+          <div class="sub-title" data-i18n="mega.industries.cat">Industries</div>
+          <h3 class="mega-title" data-i18n="mega.industries.title">Des équipements pour chaque terrain</h3>
+          <p class="mega-desc" data-i18n="mega.industries.desc">De l'opération militaire à la catastrophe civile, la même exigence : voir, protéger, soigner.</p>
+          <a class="btn btn-outline btn-sm" href="#industries"><span data-i18n="mega.industries.cta">Tous les secteurs</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="mega-group">
+          <div class="mega-head" data-i18n="mega.industries.g1">Défense</div>
+          <ul class="mega-list">
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g1.l1">Reconnaissance & ISR</span></a></li>
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g1.l2">Protection des forces</span></a></li>
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g1.l3">Soins aux troupes</span></a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-head" data-i18n="mega.industries.g2">Sécurité intérieure</div>
+          <ul class="mega-list">
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g2.l1">Surveillance urbaine</span></a></li>
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g2.l2">Caméras corporelles</span></a></li>
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g2.l3">Infrastructures critiques</span></a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-head" data-i18n="mega.industries.g3">Médical & civil</div>
+          <ul class="mega-list">
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g3.l1">Secours & catastrophes</span></a></li>
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g3.l2">Soins rapides civils</span></a></li>
+            <li><a href="#industries"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span data-i18n="mega.industries.g3.l3">Hôpitaux & cliniques</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="label hero-anim">Plateforme d'orchestration IA</div>
-      <h1 class="hero-anim d2">Le système d'exploitation souverain pour l'IA appliquée</h1>
-      <p class="lead hero-anim d3">Jinim connecte la décision humaine aux agents IA qui exécutent le travail — hébergé où vous le décidez, sans dépendance à un fournisseur unique.</p>
-      <div class="hero-actions hero-anim d3">
-        <button class="btn btn-primary" onclick="openModal()">Demander une démo</button>
-        <a href="#architecture" class="btn btn-ghost">Voir l'architecture</a>
+<section class="hero" id="top">
+  <div class="hero-media" aria-hidden="true">
+    <img class="media-bg" src="assets/media/hero-ph.svg" alt="" aria-hidden="true">
+    <video class="media-real hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/media/hero.jpg" src="assets/media/hero.mp4" onerror="this.style.display='none'"></video>
+    <div class="radar"><span class="blip b1"></span><span class="blip b2"></span><span class="blip b3"></span><span class="blip b4"></span></div>
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-inner wrap">
+    <div class="hero-row">
+      <div class="hero-title-group">
+        <div class="sub-title" data-i18n="hero.label">Équipements critiques — défense & secours</div>
+        <h1 class="hero-title" data-i18n="hero.title">voir. protéger. soigner.</h1>
+      </div>
+      <div class="hero-side">
+        <p class="hero-desc" data-i18n="hero.desc">Jimin développe le matériel d'urgence qui équipe les armées, les forces de sécurité et les secours : drones de reconnaissance et de surveillance, caméras fixes et corporelles, et équipements médicaux de soins rapides.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#products"><span data-i18n="hero.cta.primary">Explorer les solutions</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-outline" href="#ecosystem" data-i18n="hero.cta.secondary">Construire avec Jimin</a>
+        </div>
+        <div class="hero-console">
+          <span class="console-tag"><span class="pulse"></span><span data-i18n="hero.console">jimin ops // réseau déployé</span></span>
+          <span class="console-readout" data-i18n="hero.console2">drones : 12 · caméras : 214 · soins : prêts</span>
+        </div>
       </div>
     </div>
-    <div class="hero-diagram hero-anim d3">
-      <div class="cap"><span>console.jinim // orchestrateur</span><span class="dot">● actif</span></div>
-      <svg viewBox="0 0 360 260" width="100%">
-        <line class="node-line" x1="180" y1="130" x2="60" y2="40"/>
-        <line class="node-line" x1="180" y1="130" x2="300" y2="40"/>
-        <line class="node-line-active" x1="180" y1="130" x2="60" y2="130"/>
-        <line class="node-line-active" x1="180" y1="130" x2="300" y2="130"/>
-        <line class="node-line" x1="180" y1="130" x2="60" y2="220"/>
-        <line class="node-line" x1="180" y1="130" x2="300" y2="220"/>
-
-        <circle class="node-dot-core" cx="180" cy="130" r="26"/>
-        <text class="node-text node-text-core" x="180" y="125" text-anchor="middle">JINIM</text>
-        <text class="node-text node-text-core" x="180" y="137" text-anchor="middle">CORE</text>
-
-        <circle class="node-dot" cx="60" cy="40" r="18"/>
-        <text class="node-text" x="60" y="16" text-anchor="middle">agent.crm</text>
-
-        <circle class="node-dot" cx="300" cy="40" r="18"/>
-        <text class="node-text" x="300" y="16" text-anchor="middle">agent.support</text>
-
-        <circle class="node-dot" cx="60" cy="130" r="18"/>
-        <text class="node-text" x="60" y="106" text-anchor="middle">infra.local</text>
-
-        <circle class="node-dot" cx="300" cy="130" r="18"/>
-        <text class="node-text" x="300" y="106" text-anchor="middle">modèle.llm</text>
-
-        <circle class="node-dot" cx="60" cy="220" r="18"/>
-        <text class="node-text" x="60" y="250" text-anchor="middle">agent.data</text>
-
-        <circle class="node-dot" cx="300" cy="220" r="18"/>
-        <text class="node-text" x="300" y="250" text-anchor="middle">connecteur.erp</text>
-      </svg>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hst-idx">01</span>
+        <div class="hst-num" data-i18n="hero.stat1.t">Drones ISR</div>
+        <div class="hst-desc" data-i18n="hero.stat1.d">Détection, poursuite et reporting automatiques des zones à risque.</div>
+      </div>
+      <div class="hero-stat">
+        <span class="hst-idx">02</span>
+        <div class="hst-num" data-i18n="hero.stat2.t">Caméras & capteurs</div>
+        <div class="hst-desc" data-i18n="hero.stat2.d">Caméras fixes et corporelles, vision thermique et nocturne.</div>
+      </div>
+      <div class="hero-stat">
+        <span class="hst-idx">03</span>
+        <div class="hst-num" data-i18n="hero.stat3.t">Soins rapides</div>
+        <div class="hst-desc" data-i18n="hero.stat3.d">Équipements d'urgence pour stabiliser et soigner sans attendre.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="mission">
-  <div class="wrap mission-inner">
-    <div class="label">Notre approche</div>
-    <h2>Vous gardez la décision. Jinim orchestre l'exécution.</h2>
-    <p>L'intelligence artificielle ne remplace pas le jugement humain, elle en démultiplie la portée. Jinim place vos équipes au centre des décisions pendant que des agents spécialisés exécutent les tâches, se coordonnent entre eux et rendent compte — sur l'infrastructure que vous choisissez, sans jamais transiter par un cloud tiers imposé.</p>
+<section class="mission-hero" id="mission">
+  <div class="mission-media" aria-hidden="true">
+    <img class="media-bg" src="assets/media/mission-ph.svg" alt="" aria-hidden="true">
+    <img class="media-real" src="assets/media/mission.jpg" alt="" onerror="this.style.display='none'">
+    <div class="mission-shade" aria-hidden="true"></div>
   </div>
-  <div class="wrap">
-    <div class="mission-visual">
-      <svg viewBox="0 0 1160 360" xmlns="http://www.w3.org/2000/svg">
-        <rect width="1160" height="360" fill="#141414"/>
-        <g stroke="#2E2E2E" stroke-width="1">
-          <line x1="0" y1="60" x2="1160" y2="60"/>
-          <line x1="0" y1="150" x2="1160" y2="150"/>
-          <line x1="0" y1="240" x2="1160" y2="240"/>
-          <line x1="0" y1="300" x2="1160" y2="300"/>
-          <line x1="140" y1="0" x2="140" y2="360"/>
-          <line x1="420" y1="0" x2="420" y2="360"/>
-          <line x1="740" y1="0" x2="740" y2="360"/>
-          <line x1="1020" y1="0" x2="1020" y2="360"/>
-        </g>
-        <circle cx="280" cy="180" r="86" fill="none" stroke="#4A4A47" stroke-width="1"/>
-        <circle cx="280" cy="180" r="10" fill="#F4F4F2"/>
-        <text x="280" y="300" text-anchor="middle" fill="#8C8C89" font-family="IBM Plex Mono, monospace" font-size="12">décision humaine</text>
-
-        <g stroke="#4A4A47" stroke-width="1">
-          <line x1="360" y1="150" x2="560" y2="110"/>
-          <line x1="360" y1="210" x2="560" y2="210"/>
-          <line x1="360" y1="180" x2="560" y2="300"/>
-        </g>
-        <circle cx="560" cy="110" r="7" fill="#F4F4F2"/>
-        <circle cx="560" cy="210" r="7" fill="#F4F4F2"/>
-        <circle cx="560" cy="300" r="7" fill="#F4F4F2"/>
-
-        <g stroke="#3A3A38" stroke-width="1">
-          <line x1="567" y1="110" x2="900" y2="70"/>
-          <line x1="567" y1="110" x2="900" y2="150"/>
-          <line x1="567" y1="210" x2="900" y2="190"/>
-          <line x1="567" y1="210" x2="900" y2="250"/>
-          <line x1="567" y1="300" x2="900" y2="290"/>
-        </g>
-        <circle cx="900" cy="70" r="5" fill="#8C8C89"/>
-        <circle cx="900" cy="150" r="5" fill="#8C8C89"/>
-        <circle cx="900" cy="190" r="5" fill="#8C8C89"/>
-        <circle cx="900" cy="250" r="5" fill="#8C8C89"/>
-        <circle cx="900" cy="290" r="5" fill="#8C8C89"/>
-        <text x="900" y="330" text-anchor="middle" fill="#8C8C89" font-family="IBM Plex Mono, monospace" font-size="12">exécution par les agents</text>
-      </svg>
+  <div class="wrap mission-wrap">
+    <div class="mission-row">
+      <div>
+        <div class="sub-title" data-i18n="mission.label">Notre mission</div>
+        <h2 class="mission-title"><span data-i18n="mission.t1">Devancer le danger.</span><br><span data-i18n="mission.t2">Soigner sans attendre.</span></h2>
+      </div>
+      <div class="mission-desc">
+        <p data-i18n="mission.desc">L'opérateur reste au centre de la décision. Jimin conçoit les équipements qui étendent sa perception — drones et caméras — et stabilisent la blessure avant l'arrivée du soin, pour les troupes comme pour les civils.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="platform" id="platform">
+<section class="products" id="products">
   <div class="wrap">
-    <div class="platform-head">
-      <div class="label">Plateforme</div>
-      <h2>Jinim fait tourner l'IA appliquée</h2>
-      <p>Une couche logicielle unique, indépendante du fournisseur de modèle, du cloud et du matériel, pensée pour orchestrer des agents à l'échelle d'une organisation entière.</p>
+    <div class="products-head-row">
+      <div class="products-title">
+        <div class="sub-title" data-i18n="products.label">Produits</div>
+        <h2 data-i18n="products.title">La chaîne d'équipements de la première ligne</h2>
+      </div>
+      <div class="products-intro">
+        <p data-i18n="products.desc">Quatre familles complètes et complémentaires, conçues pour la détection, la protection et le soin — déployables ensemble sur un même théâtre.</p>
+      </div>
     </div>
-    <div class="feature-grid">
-      <div class="feature">
-        <span class="idx">01</span>
-        <h3>Agents IA</h3>
-        <p>Des agents qui apprennent des compétences métier, exécutent des tâches et automatisent des processus complexes de bout en bout.</p>
-      </div>
-      <div class="feature">
-        <span class="idx">02</span>
-        <h3>Infrastructure agnostique</h3>
-        <p>Déployez sur votre propre serveur, en cloud privé, en cloud public ou en environnement air-gapped, sans jamais réécrire vos agents.</p>
-      </div>
-      <div class="feature">
-        <span class="idx">03</span>
-        <h3>Orchestration autonome</h3>
-        <p>Coordonnez des flottes d'agents plutôt que de superviser chaque tâche une à une, avec des règles de délégation claires.</p>
-      </div>
-      <div class="feature">
-        <span class="idx">04</span>
-        <h3>Écosystème ouvert</h3>
-        <p>Connectez applications, modèles de langage, sources de données et intégrateurs à travers une seule plateforme.</p>
-      </div>
+    <div class="product-grid">
+      <article class="product-card" data-idx="01">
+        <div class="p-media" aria-hidden="true">
+          <img src="assets/media/p1-ph.svg" alt="" aria-hidden="true">
+          <img class="media-real" src="assets/media/p1.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="p-top">
+          <span class="p-idx">01</span>
+          <div class="p-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="1.5"><circle cx="24" cy="24" r="3.5"/><line x1="24" y1="24" x2="14" y2="14"/><line x1="24" y1="24" x2="34" y2="14"/><line x1="24" y1="24" x2="14" y2="34"/><line x1="24" y1="24" x2="34" y2="34"/><circle cx="14" cy="14" r="4"/><circle cx="34" cy="14" r="4"/><circle cx="14" cy="34" r="4"/><circle cx="34" cy="34" r="4"/><line x1="24" y1="27.5" x2="24" y2="33"/><path d="M19 33h10"/></svg></div>
+        </div>
+        <div class="p-tag" data-i18n="products.p1.tag">Reconnaissance & surveillance autonome</div>
+        <h3 data-i18n="products.p1.name">Drone J-ISR</h3>
+        <p class="p-desc" data-i18n="products.p1.desc">Détection, poursuite et éclairage de zone en continu, de jour comme de nuit, avec renvoi de la vidéo en temps réel au poste de commandement.</p>
+        <ul class="p-specs">
+          <li data-i18n="products.p1.s1">autonomie 45 min</li>
+          <li data-i18n="products.p1.s2">portée 12 km</li>
+          <li data-i18n="products.p1.s3">vision thermique</li>
+          <li data-i18n="products.p1.s4">anti-brouillage</li>
+        </ul>
+        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="product-card" data-idx="02">
+        <div class="p-media" aria-hidden="true">
+          <img src="assets/media/p2-ph.svg" alt="" aria-hidden="true">
+          <img class="media-real" src="assets/media/p2.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="p-top">
+          <span class="p-idx">02</span>
+          <div class="p-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="1.5"><rect x="6" y="30" width="4" height="12"/><path d="M14 20a10 10 0 0 1 20 0v12H14z"/><circle cx="24" cy="19" r="3.5"/><line x1="24" y1="32" x2="24" y2="40"/></svg></div>
+        </div>
+        <div class="p-tag" data-i18n="products.p2.tag">Surveillance fixe, vision de nuit</div>
+        <h3 data-i18n="products.p2.name">Caméra J-SCAM</h3>
+        <p class="p-desc" data-i18n="products.p2.desc">Caméras réseau robustes pour la protection des sites sensibles, des frontières et des zones urbaines, avec analyse embarquée.</p>
+        <ul class="p-specs">
+          <li data-i18n="products.p2.s1">4K HDR</li>
+          <li data-i18n="products.p2.s2">vision nocturne IR</li>
+          <li data-i18n="products.p2.s3">indice IP67</li>
+          <li data-i18n="products.p2.s4">analyse embarquée</li>
+        </ul>
+        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="product-card" data-idx="03">
+        <div class="p-media" aria-hidden="true">
+          <img src="assets/media/p3-ph.svg" alt="" aria-hidden="true">
+          <img class="media-real" src="assets/media/p3.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="p-top">
+          <span class="p-idx">03</span>
+          <div class="p-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="1.5"><rect x="14" y="8" width="20" height="26" rx="3"/><circle cx="24" cy="18" r="3.5"/><circle cx="31" cy="27" r="1.8" fill="#FFFFFF" stroke="none"/><line x1="14" y1="34" x2="14" y2="40"/><rect x="18" y="40" width="12" height="2"/></svg></div>
+        </div>
+        <div class="p-tag" data-i18n="products.p3.tag">Preuve intégrale d'intervention</div>
+        <h3 data-i18n="products.p3.name">Bodycam J-BWC</h3>
+        <p class="p-desc" data-i18n="products.p3.desc">Caméras portées par les forces, les policiers et les secouristes pour documenter chaque intervention avec chiffrement de bout en bout.</p>
+        <ul class="p-specs">
+          <li data-i18n="products.p3.s1">enreg. 12 h</li>
+          <li data-i18n="products.p3.s2">chiffrement AES-256</li>
+          <li data-i18n="products.p3.s3">déclenchement partagé</li>
+          <li data-i18n="products.p3.s4">anti-altération</li>
+        </ul>
+        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="product-card" data-idx="04">
+        <div class="p-media" aria-hidden="true">
+          <img src="assets/media/p4-ph.svg" alt="" aria-hidden="true">
+          <img class="media-real" src="assets/media/p4.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="p-top">
+          <span class="p-idx">04</span>
+          <div class="p-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="1.5"><rect x="8" y="6" width="32" height="32" rx="4"/><line x1="24" y1="13" x2="24" y2="31"/><line x1="15" y1="22" x2="33" y2="22"/><path d="M6 42h10l3-7 5 12 4-8 2 3h12"/></svg></div>
+        </div>
+        <div class="p-tag" data-i18n="products.p4.tag">Stabiliser avant l'arrivée du secours</div>
+        <h3 data-i18n="products.p4.name">J-CARE Soins rapides</h3>
+        <p class="p-desc" data-i18n="products.p4.desc">Kits, garrots, pansements hémostatiques et dispositifs de stabilisation pour prendre en charge un blessé en moins de quelques minutes — troupe ou civil.</p>
+        <ul class="p-specs">
+          <li data-i18n="products.p4.s1">pose &lt; 60 s</li>
+          <li data-i18n="products.p4.s2">poids &lt; 1 kg</li>
+          <li data-i18n="products.p4.s3">usage unique</li>
+          <li data-i18n="products.p4.s4">certifié ISO 13485</li>
+        </ul>
+        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
     </div>
   </div>
 </section>
@@ -194,31 +317,78 @@
 
 <section class="industries" id="industries">
   <div class="wrap">
-    <div class="ind-head">
-      <div class="label">Secteurs</div>
-      <h2>L'IA appliquée à chaque métier</h2>
+    <div class="ind-head-row">
+      <div class="ind-title">
+        <div class="sub-title" data-i18n="industries.label">Industries</div>
+        <h2 data-i18n="industries.title">Une chaîne d'équipements pour chaque terrain</h2>
+      </div>
+      <div class="ind-intro">
+        <p data-i18n="industries.desc">Les armées, les forces de sécurité et les secours affrontent les mêmes contraintes : agir vite, voir large, protéger et soigner. Jimin équipe chacune de ces missions.</p>
+      </div>
     </div>
     <div class="ind-grid">
-      <div class="ind-card">
-        <div class="ind-icon"><svg viewBox="0 0 44 44" fill="none" stroke="#F4F4F2" stroke-width="1.3"><rect x="6" y="10" width="32" height="22" rx="1"/><line x1="6" y1="17" x2="38" y2="17"/><circle cx="12" cy="13.5" r="0.8" fill="#F4F4F2"/><line x1="17" y1="24" x2="27" y2="24"/><line x1="17" y1="28" x2="24" y2="28"/></svg></div>
-        <span class="num">Entreprise</span>
-        <h3>Opérations & support</h3>
-        <p>Automatisez le traitement des demandes, la coordination interne et le suivi client sans exposer vos données à un tiers.</p>
-        <a href="#">En savoir plus</a>
+      <a href="#products" class="ind-card" data-num="01">
+        <div class="ind-top">
+          <span class="ind-num">01</span>
+          <div class="ind-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="1.5"><path d="M24 6l14 5v11c0 10-6 16-14 20-8-4-14-10-14-20V11z"/><path d="M17 24l5 5 9-11"/></svg></div>
+        </div>
+        <div class="ind-body">
+          <h3 data-i18n="industries.g1">Défense</h3>
+          <ul>
+            <li data-i18n="industries.g1.l1">Reconnaissance & ISR</li>
+            <li data-i18n="industries.g1.l2">Protection des forces</li>
+            <li data-i18n="industries.g1.l3">Soins rapides aux troupes</li>
+          </ul>
+        </div>
+        <span class="ind-link" data-i18n="industries.more">Découvrir</span>
+      </a>
+      <a href="#products" class="ind-card" data-num="02">
+        <div class="ind-top">
+          <span class="ind-num">02</span>
+          <div class="ind-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="1.5"><path d="M8 40h32"/><rect x="13" y="22" width="8" height="18"/><rect x="27" y="15" width="8" height="25"/><rect x="14.5" y="26" width="5" height="4"/><path d="M27 9h8l2 3v14h-12V12z"/><circle cx="31" cy="16" r="2.5"/></svg></div>
+        </div>
+        <div class="ind-body">
+          <h3 data-i18n="industries.g2">Sécurité intérieure</h3>
+          <ul>
+            <li data-i18n="industries.g2.l1">Surveillance urbaine</li>
+            <li data-i18n="industries.g2.l2">Caméras corporelles</li>
+            <li data-i18n="industries.g2.l3">Infrastructures critiques</li>
+          </ul>
+        </div>
+        <span class="ind-link" data-i18n="industries.more">Découvrir</span>
+      </a>
+      <a href="#products" class="ind-card" data-num="03">
+        <div class="ind-top">
+          <span class="ind-num">03</span>
+          <div class="ind-icon"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="1.5"><path d="M24 40S8 30 8 18c0-5 4-9 9-9 3 0 5 2 7 5 2-3 4-5 7-5 5 0 9 4 9 9 0 12-16 22-16 22z"/><line x1="24" y1="19" x2="24" y2="31"/><line x1="18" y1="25" x2="30" y2="25"/></svg></div>
+        </div>
+        <div class="ind-body">
+          <h3 data-i18n="industries.g3">Médical & civil</h3>
+          <ul>
+            <li data-i18n="industries.g3.l1">Secours & catastrophes</li>
+            <li data-i18n="industries.g3.l2">Soins rapides civils</li>
+            <li data-i18n="industries.g3.l3">Hôpitaux & cliniques</li>
+          </ul>
+        </div>
+        <span class="ind-link" data-i18n="industries.more">Découvrir</span>
+      </a>
+    </div>
+    <div class="ind-stats">
+      <div class="ind-stat">
+        <div class="ind-stat-num">24/7</div>
+        <div class="ind-stat-label" data-i18n="industries.s1">surveillance & vigie continues</div>
       </div>
-      <div class="ind-card">
-        <div class="ind-icon"><svg viewBox="0 0 44 44" fill="none" stroke="#F4F4F2" stroke-width="1.3"><path d="M22 6 L38 12 V22 C38 31 31 36 22 39 C13 36 6 31 6 22 V12 Z"/><path d="M15 22 L20 27 L30 15"/></svg></div>
-        <span class="num">Finance & assurance</span>
-        <h3>Conformité & analyse</h3>
-        <p>Des agents qui vérifient, croisent et documentent chaque décision, avec une traçabilité complète pour l'audit.</p>
-        <a href="#">En savoir plus</a>
+      <div class="ind-stat">
+        <div class="ind-stat-num">&lt; 60 s</div>
+        <div class="ind-stat-label" data-i18n="industries.s2">délai de pose des soins d'urgence</div>
       </div>
-      <div class="ind-card">
-        <div class="ind-icon"><svg viewBox="0 0 44 44" fill="none" stroke="#F4F4F2" stroke-width="1.3"><rect x="6" y="18" width="18" height="16" rx="1"/><path d="M24 24 H33 L38 29 V34 H24 Z"/><circle cx="13" cy="36" r="2.4"/><circle cx="32" cy="36" r="2.4"/><line x1="10" y1="12" x2="18" y2="12"/><line x1="14" y1="8" x2="14" y2="16"/></svg></div>
-        <span class="num">Industrie & logistique</span>
-        <h3>Planification & suivi</h3>
-        <p>Orchestrez la prévision, l'ordonnancement et le suivi terrain à partir d'une infrastructure hébergée localement.</p>
-        <a href="#">En savoir plus</a>
+      <div class="ind-stat">
+        <div class="ind-stat-num">0,6 kg</div>
+        <div class="ind-stat-label" data-i18n="industries.s3">poids du kit de soin du combattant</div>
+      </div>
+      <div class="ind-stat">
+        <div class="ind-stat-num">1</div>
+        <div class="ind-stat-label" data-i18n="industries.s4">console unique de commandement</div>
       </div>
     </div>
   </div>
@@ -227,173 +397,269 @@
 <section class="ecosystem" id="ecosystem">
   <div class="wrap eco-grid">
     <div class="eco-copy">
-      <div class="label">Écosystème</div>
-      <h2>Un marché ouvert d'agents et de connecteurs</h2>
-      <p>Jinim relie modèles de langage, applications métier, sources de données et intégrateurs à travers un socle commun.</p>
+      <div class="sub-title" data-i18n="eco.label">Écosystème</div>
+      <h2 data-i18n="eco.title">Un écosystème ouvert d'équipements et de partenaires</h2>
+      <p data-i18n="eco.desc">Jimin s'appuie sur un marché ouvert : constructeurs de drones, fabricants de capteurs, intégrateurs et développeurs relient leurs solutions à un socle commun — données, montage et certification.</p>
       <ul class="eco-list">
-        <li>Publiez vos propres agents sur la place de marché Jinim</li>
-        <li>Connectez n'importe quel modèle de langage, propriétaire ou ouvert</li>
-        <li>Intégrez vos outils existants sans migration forcée</li>
+        <li data-i18n="eco.l1">Publier des équipements et des modules sur le marché Jimin</li>
+        <li data-i18n="eco.l2">Brancher drone, caméra ou dispositif médical en jours, pas en mois</li>
+        <li data-i18n="eco.l3">Certifier vos produits Jimin Certified™ pour un déploiement garanti</li>
       </ul>
+      <a class="btn btn-outline btn-sm" href="#demo" onclick="openModal()"><span data-i18n="eco.cta">Devenir partenaire</span></a>
     </div>
     <div class="eco-panel">
+      <div class="eco-panel-head">
+        <span class="eco-cert" data-i18n="eco.cert">Jimin Certified™</span>
+        <span class="eco-cert-note" data-i18n="eco.cert.note">déploiement garanti</span>
+      </div>
       <div class="eco-tags">
-        <span class="eco-tag on">Jinim Core</span>
-        <span class="eco-tag">CRM</span>
-        <span class="eco-tag on">Modèles locaux</span>
-        <span class="eco-tag">ERP</span>
-        <span class="eco-tag">Messagerie</span>
-        <span class="eco-tag on">Bases de données</span>
-        <span class="eco-tag">API externes</span>
-        <span class="eco-tag">Fichiers</span>
-        <span class="eco-tag on">Modèles cloud</span>
-        <span class="eco-tag">Agents tiers</span>
+        <span class="eco-tag on" data-i18n="eco.t1">Drones ISR</span>
+        <span class="eco-tag" data-i18n="eco.t2">Capteurs</span>
+        <span class="eco-tag on" data-i18n="eco.t3">Caméras fixes</span>
+        <span class="eco-tag" data-i18n="eco.t4">Bodycams</span>
+        <span class="eco-tag on" data-i18n="eco.t5">Soins rapides</span>
+        <span class="eco-tag" data-i18n="eco.t6">Radars</span>
+        <span class="eco-tag on" data-i18n="eco.t7">Vision thermique</span>
+        <span class="eco-tag" data-i18n="eco.t8">Intégrateurs</span>
+        <span class="eco-tag on" data-i18n="eco.t9">Systèmes de commandement</span>
+        <span class="eco-tag" data-i18n="eco.t10">Distributeurs</span>
+      </div>
+      <div class="eco-cert-row">
+        <span class="eco-cert-badge">✓</span>
+        <div>
+          <strong data-i18n="eco.cert.title">Programme Jimin Certified™</strong>
+          <p data-i18n="eco.cert.desc">Chaque équipement est testé pour la violence des usages militaires et de secours.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="deploy" id="deploy">
+<section class="cyber" id="cyber">
   <div class="wrap">
-    <div class="deploy-head">
-      <div class="label">Déploiement</div>
-      <h2>Hébergé où vous décidez</h2>
-      <p>Jinim s'adapte à votre politique de données, pas l'inverse.</p>
-    </div>
-    <div class="deploy-grid">
-      <div class="deploy-card">
-        <h3>Sur site</h3>
-        <p>Vos serveurs, vos règles. Aucune donnée ne quitte votre réseau.</p>
+    <div class="cyber-head-row">
+      <div class="cyber-title">
+        <div class="sub-title" data-i18n="cyber.label">Logiciels & cyberdéfense</div>
+        <h2>JCyber<span class="mark">™</span></h2>
+        <div class="cyber-sub" data-i18n="cyber.sub">Application mobile de cybersécurité des équipes</div>
+        <p data-i18n="cyber.desc">JCyber protège le téléphone des combattants, secouristes et forces de l'ordre : chiffrement des échanges, détection des menaces autour de vous et canal de commandement sécurisé.</p>
       </div>
-      <div class="deploy-card">
-        <h3>Cloud privé</h3>
-        <p>Une instance dédiée, isolée, chez l'hébergeur de votre choix.</p>
-      </div>
-      <div class="deploy-card">
-        <h3>Air-gapped</h3>
-        <p>Fonctionnement entièrement déconnecté pour les environnements sensibles.</p>
-      </div>
-      <div class="deploy-card">
-        <h3>Cloud public</h3>
-        <p>Démarrez rapidement, migrez vers votre infrastructure quand vous le souhaitez.</p>
+      <div class="cyber-actions">
+        <span class="cyber-badge" data-i18n="cyber.avail">Android · iOS</span>
+        <button class="btn btn-primary" onclick="openModal()"><span data-i18n="cyber.cta">Réserver la démo</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
     </div>
-    <div class="deploy-visual">
-      <svg viewBox="0 0 1160 220" xmlns="http://www.w3.org/2000/svg">
-        <rect width="1160" height="220" fill="#0A0A0A"/>
-        <g stroke="#2E2E2E" stroke-width="1">
-          <rect x="60" y="60" width="200" height="100" rx="2"/>
-          <rect x="340" y="60" width="200" height="100" rx="2"/>
-          <rect x="620" y="60" width="200" height="100" rx="2"/>
-          <rect x="900" y="60" width="200" height="100" rx="2"/>
-        </g>
-        <g fill="#6E6E6B" font-family="IBM Plex Mono, monospace" font-size="12">
-          <text x="160" y="185" text-anchor="middle">sur site</text>
-          <text x="440" y="185" text-anchor="middle">cloud privé</text>
-          <text x="720" y="185" text-anchor="middle">air-gapped</text>
-          <text x="1000" y="185" text-anchor="middle">cloud public</text>
-        </g>
-        <g stroke="#4A4A47" stroke-width="1">
-          <line x1="90" y1="90" x2="230" y2="130"/>
-          <line x1="90" y1="130" x2="230" y2="90"/>
-          <line x1="370" y1="90" x2="510" y2="130"/>
-          <line x1="370" y1="130" x2="510" y2="90"/>
-          <line x1="650" y1="110" x2="790" y2="110"/>
-          <line x1="930" y1="90" x2="1070" y2="130"/>
-          <line x1="930" y1="130" x2="1070" y2="90"/>
-        </g>
-        <circle cx="160" cy="110" r="4" fill="#F4F4F2"/>
-        <circle cx="440" cy="110" r="4" fill="#F4F4F2"/>
-        <circle cx="720" cy="110" r="4" fill="#F4F4F2"/>
-        <circle cx="1000" cy="110" r="4" fill="#F4F4F2"/>
-      </svg>
+    <div class="cyber-grid">
+      <div class="cyber-phone" aria-hidden="true">
+        <div class="cyber-phone-screen">
+          <div class="cp-status"><span>09:41</span><span>▲▲ 100%</span></div>
+          <div class="cp-app">
+            <div class="cp-top"><span class="cp-logo">JCyber</span><span class="cp-live">LIVE</span></div>
+            <div class="cp-score">
+              <div class="cp-ring"><span>95</span></div>
+              <div class="cp-score-txt">
+                <strong data-i18n="cyber.score">indice de sécurité</strong>
+                <span data-i18n="cyber.secure">système verrouillé</span>
+              </div>
+            </div>
+            <div class="cp-feed">
+              <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed1">liaison chiffrée active</span></div>
+              <div class="cp-feed-item warn"><span class="dot"></span><span data-i18n="cyber.feed2">menace bloquée — wifi piégé</span></div>
+              <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed3">VPN tactique : zone nord</span></div>
+              <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed4">accès biométrique validé</span></div>
+            </div>
+            <div class="cp-chips"><span>VPN</span><span>SCRAM</span><span>E2EE</span></div>
+            <div class="cp-nav"><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="cyber-feats">
+        <article class="cyber-feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><circle cx="12" cy="11" r="2.5"/><path d="M10.5 13.5L9 17"/></svg></div>
+          <strong data-i18n="cyber.f1.t">Détection de menaces en temps réel</strong>
+          <p data-i18n="cyber.f1.d">Alerte wifi piégé, Bluetooth suspect et attaques de proximité.</p>
+        </article>
+        <article class="cyber-feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9V7a6 6 0 1 1 12 0v2"/><rect x="4" y="9" width="16" height="12" rx="2"/><path d="M10 15l2 2 3-4"/></svg></div>
+          <strong data-i18n="cyber.f2.t">Canal de commandement chiffré</strong>
+          <p data-i18n="cyber.f2.d">Communications tactiques chiffrées de bout en bout.</p>
+        </article>
+        <article class="cyber-feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/><path d="M7.5 9.5L12 12l4.5 2.5" opacity=".6"/></svg></div>
+          <strong data-i18n="cyber.f3.t">VPN tactique embarqué</strong>
+          <p data-i18n="cyber.f3.d">Masque le trafic et garde la liaison même en zone hostile.</p>
+        </article>
+        <article class="cyber-feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div>
+          <strong data-i18n="cyber.f4.t">Carte des risques locale</strong>
+          <p data-i18n="cyber.f4.d">Niveaux de menace cyber géolocalisés zone par zone.</p>
+        </article>
+        <article class="cyber-feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a4 4 0 0 1 4 4 4 4 0 0 1-8 0 4 4 0 0 1 4-4z"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/></svg></div>
+          <strong data-i18n="cyber.f5.t">Contrôle biométrique</strong>
+          <p data-i18n="cyber.f5.d">Ouverture par visage et code anti-extorsion.</p>
+        </article>
+        <article class="cyber-feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 12l-8-8-9 9v8h8z"/><path d="M5 5l14 14"/><path d="M1 23l2-2M21 23l-2-2" opacity=".5"/></svg></div>
+          <strong data-i18n="cyber.f6.t">Anti-hameçonnage</strong>
+          <p data-i18n="cyber.f6.d">Détecte les SMS et liens piégés avant l'équipe.</p>
+        </article>
+        <article class="cyber-feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l8 8M16 8l-8 8" opacity=".7"/></svg></div>
+          <strong data-i18n="cyber.f7.t">Quarantaine automatique</strong>
+          <p data-i18n="cyber.f7.d">Isole toute application compromise en quelques secondes.</p>
+        </article>
+        <article class="cyber-feat">
+          <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 17l8-10 8 10"/><path d="M6 19h12" opacity=".6"/></svg></div>
+          <strong data-i18n="cyber.f8.t">Mode furtif</strong>
+          <p data-i18n="cyber.f8.d">L'application se masque : aucune trace visible à l'écran.</p>
+        </article>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="metrics">
-  <div class="wrap metrics-grid">
-    <div class="metric">
-      <div class="num">40 000+</div>
-      <div class="desc">agents orchestrés en production</div>
+<section class="lab" id="lab">
+  <div class="wrap">
+    <div class="lab-head-row">
+      <div class="lab-title">
+        <div class="sub-title" data-i18n="lab.label">Formation & apprentissage</div>
+        <h2>Jinim Lab<span class="mark">™</span></h2>
+        <div class="lab-sub" data-i18n="lab.sub">Le logiciel qui forme les métiers de demain</div>
+        <p data-i18n="lab.desc">Jinim Lab embarque des centaines de tutoriels gratuits, des parcours métiers guidés et des certificats — pour apprendre aux jeunes les savoir-faire de la défense, de la tech et du secours.</p>
+      </div>
+      <div class="lab-actions">
+        <a class="btn btn-primary" href="#demo" onclick="openModal()"><span data-i18n="lab.cta">Commencer gratuitement</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
     </div>
-    <div class="metric">
-      <div class="num">120</div>
-      <div class="desc">connecteurs et intégrations disponibles</div>
+    <div class="lab-grid">
+      <div class="lab-term" aria-hidden="true">
+        <div class="lab-term-bar"><span class="lt-dots"></span><span data-i18n="lab.term">jimin lab — parcours en cours</span></div>
+        <div class="lab-term-body">
+          <div class="lab-row">
+            <div><strong data-i18n="lab.term1">Cyberdéfense — niveau 1</strong><span>80 %</span></div>
+            <div class="lab-prog" style="--p:80%"></div>
+          </div>
+          <div class="lab-row">
+            <div><strong data-i18n="lab.term2">Pilotage drone ISR</strong><span>45 %</span></div>
+            <div class="lab-prog" style="--p:45%"></div>
+          </div>
+          <div class="lab-row">
+            <div><strong data-i18n="lab.term3">Électronique & drones</strong><span>62 %</span></div>
+            <div class="lab-prog" style="--p:62%"></div>
+          </div>
+          <div class="lab-row">
+            <div><strong data-i18n="lab.term4">Secourisme tactique</strong><span>12 %</span></div>
+            <div class="lab-prog" style="--p:12%"></div>
+          </div>
+          <div class="lab-term-foot">
+            <span class="lab-flag">100 %</span>
+            <span data-i18n="lab.termfree">gratuit · certificat à la clé</span>
+          </div>
+        </div>
+      </div>
+      <div class="lab-copy">
+        <ul class="lab-feats">
+          <li>
+            <strong data-i18n="lab.f1.t">Tutoriels 100 % gratuits</strong>
+            <span data-i18n="lab.f1.d">Vidéos, guides pas à pas et exercices pratiques.</span>
+          </li>
+          <li>
+            <strong data-i18n="lab.f2.t">Parcours métiers guidés</strong>
+            <span data-i18n="lab.f2.d">Pilote ISR, technicien drone, cyber, électronicien, secouriste…</span>
+          </li>
+          <li>
+            <strong data-i18n="lab.f3.t">Simulateurs & sandbox</strong>
+            <span data-i18n="lab.f3.d">S'entraîner sur du matériel numérique, sans risque.</span>
+          </li>
+          <li>
+            <strong data-i18n="lab.f4.t">Certificats Jimin Lab</strong>
+            <span data-i18n="lab.f4.d">Reconnus par les partenaires de l'écosystème, partageables.</span>
+          </li>
+          <li>
+            <strong data-i18n="lab.f5.t">Communauté & clubs</strong>
+            <span data-i18n="lab.f5.d">Mentorat, groupes locaux et concours pour progresser ensemble.</span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="metric">
-      <div class="num">99,95%</div>
-      <div class="desc">disponibilité mesurée sur les déploiements Jinim</div>
-    </div>
-    <div class="metric">
-      <div class="num">0</div>
-      <div class="desc">dépendance obligatoire à un cloud propriétaire</div>
+    <div class="lab-stats">
+      <div class="lab-stat"><div class="lab-stat-num">10 000+</div><div class="lab-stat-label" data-i18n="lab.s1">jeunes formés</div></div>
+      <div class="lab-stat"><div class="lab-stat-num">250+</div><div class="lab-stat-label" data-i18n="lab.s2">tutoriels gratuits</div></div>
+      <div class="lab-stat"><div class="lab-stat-num">12</div><div class="lab-stat-label" data-i18n="lab.s3">parcours métiers</div></div>
+      <div class="lab-stat"><div class="lab-stat-num">100 %</div><div class="lab-stat-label" data-i18n="lab.s4">gratuit, sans conditions</div></div>
     </div>
   </div>
 </section>
 
-<section class="cta">
+<section class="cta" id="demo">
   <div class="cta-grid">
     <div class="cta-panel deploy-panel">
-      <h3>Déployez Jinim</h3>
-      <p>Automatisez vos opérations avec des agents IA hébergés sur l'infrastructure de votre choix.</p>
-      <button class="btn btn-primary" style="width:fit-content" onclick="openModal()">Demander une démo</button>
+      <div class="sub-title" data-i18n="cta.deploy.label">Première ligne</div>
+      <h3 data-i18n="cta.deploy.title">Équipez vos forces et vos secours</h3>
+      <p data-i18n="cta.deploy.desc">Drones, caméras et soins rapides, intégrés à votre chaîne de commandement existante.</p>
+      <button class="btn btn-primary" style="width:fit-content" onclick="openModal()"><span data-i18n="cta.deploy.cta">Demander une démo</span></button>
     </div>
     <div class="cta-panel build">
-      <h3>Développez sur Jinim</h3>
-      <p>Construisez vos propres agents, intégrez vos outils et rejoignez l'écosystème Jinim.</p>
-      <a href="#" class="btn btn-ghost" style="width:fit-content">Devenir partenaire</a>
+      <div class="sub-title" data-i18n="cta.build.label">Partenaires</div>
+      <h3 data-i18n="cta.build.title">Construisez avec Jimin</h3>
+      <p data-i18n="cta.build.desc">Intégrez vos équipements à l'écosystème et rejoignez le programme Jimin Certified™.</p>
+      <a href="#demo" class="btn btn-outline" style="width:fit-content" onclick="openModal()"><span data-i18n="cta.build.cta">Devenir partenaire</span></a>
     </div>
   </div>
 </section>
 
-<footer>
+<footer id="news">
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#" class="logo" aria-label="Jinim">
-          <img src="assets/jinim-logo.svg" alt="Jinim">
+        <a href="#top" class="logo" aria-label="Jimin">
+          <img src="assets/jinim-logo.svg" alt="Jimin">
         </a>
-        <p>Jinim est le système d'exploitation souverain pour l'IA appliquée — au service des décisions humaines, hébergé où vous le décidez.</p>
+        <p data-i18n="footer.tag">Jimin conçoit les équipements d'urgence qui protègent et soignent — voir, protéger, soigner.</p>
       </div>
       <div class="footer-col">
-        <h4>Plateforme</h4>
+        <h4 data-i18n="footer.c1">Équipements</h4>
         <ul>
-          <li><a href="#platform">Jinim Core</a></li>
-          <li><a href="#ecosystem">Marketplace</a></li>
-          <li><a href="#">Jinim Certified</a></li>
+          <li><a href="#products" data-i18n="footer.c1.l1">Drones ISR</a></li>
+          <li><a href="#products" data-i18n="footer.c1.l2">Caméras de surveillance</a></li>
+          <li><a href="#products" data-i18n="footer.c1.l3">Caméras corporelles</a></li>
+          <li><a href="#products" data-i18n="footer.c1.l4">Soins rapides</a></li>
+          <li><a href="#cyber" data-i18n="footer.c1.l5">JCyber</a></li>
+          <li><a href="#lab" data-i18n="footer.c1.l6">Jinim Lab</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Secteurs</h4>
+        <h4 data-i18n="footer.c2">Secteurs</h4>
         <ul>
-          <li><a href="#industries">Entreprise</a></li>
-          <li><a href="#industries">Finance & assurance</a></li>
-          <li><a href="#industries">Industrie & logistique</a></li>
+          <li><a href="#industries" data-i18n="footer.c2.l1">Défense</a></li>
+          <li><a href="#industries" data-i18n="footer.c2.l2">Sécurité intérieure</a></li>
+          <li><a href="#industries" data-i18n="footer.c2.l3">Médical & civil</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" id="investors">
+        <h4 data-i18n="footer.c3">Entreprise</h4>
+        <ul>
+          <li><a href="#mission" data-i18n="footer.c3.l1">Notre mission</a></li>
+          <li><a href="#news" data-i18n="footer.c3.l2">Actualités</a></li>
+          <li><a href="#investors" data-i18n="footer.c3.l3">Investisseurs</a></li>
+          <li id="careers"><a href="#careers" data-i18n="footer.c3.l4">Carrières</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Entreprise</h4>
+        <h4 data-i18n="footer.c4">Contact</h4>
         <ul>
-          <li><a href="#">À propos</a></li>
-          <li><a href="#">Actualités</a></li>
-          <li><a href="#">Carrières</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="#" onclick="openModal(); return false;">Demander une démo</a></li>
-          <li><a href="#">Contacter l'équipe</a></li>
+          <li><a href="#" onclick="openModal(); return false;" data-i18n="footer.c4.l1">Demander une démo</a></li>
+          <li><a href="#" data-i18n="footer.c4.l2">Contacter l'équipe</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Jinim. Tous droits réservés.</span>
+      <span data-i18n="footer.legal">© 2026 Jimin. Tous droits réservés.</span>
       <div class="legal">
-        <a href="#">Confidentialité</a>
-        <a href="#">Conditions</a>
-        <a href="#">Cookies</a>
+        <a href="#" data-i18n="footer.priv">Confidentialité</a>
+        <a href="#" data-i18n="footer.terms">Conditions</a>
+        <a href="#" data-i18n="footer.cookies">Cookies</a>
       </div>
     </div>
   </div>
@@ -402,31 +668,31 @@
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-inner">
-      <button class="modal-close" aria-label="Fermer" onclick="closeModal()">×</button>
-      <h3>Demander une démo</h3>
-      <p class="sub">Dites-nous ce que vous souhaitez automatiser avec Jinim.</p>
+      <button class="modal-close" data-i18n-aria="modal.close" onclick="closeModal()">×</button>
+      <h3 data-i18n="modal.title">Demander une démo</h3>
+      <p class="sub" data-i18n="modal.sub">Équipement d'intérêt — nous revenons vers vous sous 24 h.</p>
       <form onsubmit="event.preventDefault(); closeModal();">
-        <label for="name">Nom complet</label>
+        <label for="name" data-i18n="modal.name">Nom complet</label>
         <input id="name" type="text" required>
-        <label for="email">Email professionnel</label>
+        <label for="email" data-i18n="modal.email">Email professionnel</label>
         <input id="email" type="email" required>
-        <label for="usecase">Cas d'usage</label>
+        <label for="usecase" data-i18n="modal.case">Domaine d'intérêt</label>
         <select id="usecase">
-          <option>Support & opérations</option>
-          <option>Finance & conformité</option>
-          <option>Industrie & logistique</option>
-          <option>Autre</option>
+          <option data-i18n="modal.opt1">Défense & drones ISR</option>
+          <option data-i18n="modal.opt2">Sécurité intérieure & caméras</option>
+          <option data-i18n="modal.opt3">Médical & soins rapides</option>
+          <option data-i18n="modal.opt4">Partenariat</option>
         </select>
         <div class="modal-actions">
-          <button type="submit" class="btn btn-primary">Envoyer</button>
-          <button type="button" class="btn btn-ghost" onclick="closeModal()">Annuler</button>
+          <button type="submit" class="btn btn-primary" data-i18n="modal.send">Envoyer</button>
+          <button type="button" class="btn btn-ghost" onclick="closeModal()" data-i18n="modal.cancel">Annuler</button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=3"></script>
 
 </body>
 </html>

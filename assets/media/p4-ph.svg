@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e0c0d"/><stop offset="0.6" stop-color="#0a0809"/><stop offset="1" stop-color="#040404"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#8f2f33" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#8f2f33" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#glow)"/>
+  <g stroke="#26202a" stroke-width="1">
+    <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="600" x2="1200" y2="600"/>
+    <line x1="500" y1="0" x2="500" y2="800"/><line x1="900" y1="0" x2="900" y2="800"/>
+  </g>
+  <rect x="420" y="250" width="420" height="300" rx="14" fill="#141014" stroke="#3a3134" stroke-width="2"/>
+  <path d="M600 250v-52l-34-10v10l34 8m0 44l34-10v-10l-34 8z" fill="none" stroke="#3a3134" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="460" y="420" width="340" height="110" rx="8" fill="#0f0c0f" stroke="#3a3134" stroke-width="2"/>
+  <rect x="480" y="440" width="110" height="30" rx="4" fill="#3d272a"/>
+  <rect x="604" y="440" width="70" height="30" rx="4" fill="#191519"/>
+  <rect x="688" y="440" width="92" height="30" rx="4" fill="#1c1619"/>
+  <rect x="480" y="480" width="300" height="8" rx="4" fill="#2a2326"/>
+  <circle r="34" cx="880" cy="150" fill="none" stroke="#9c5a5c" stroke-width="2.5"/>
+  <path d="M880 86v128M814 150h132" stroke="#5f3337" stroke-width="6"/>
+  <rect width="1200" height="800" fill="url(#vig)"/>
+</svg>

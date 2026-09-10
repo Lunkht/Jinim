@@ -1,0 +1,15 @@
+Ce dossier contient les MEDIAS REELS de Jimin. Depose tes fichiers ici, et le site les affichera automatiquement a la place des placeholders de secours (fichiers *-ph.svg).
+
+FICHIERS ATTENDUS
+-----------------
+hero.mp4        : video hero en boucle (format 16:9, ~1920x1080). Si absent, la photo/placeholder s'affiche.
+hero.jpg        : photo hero (16:9) utilisee comme poster / si pas de video.
+mission.jpg     : photo de la section mission (16:9).
+p1.jpg          : photo du drone J-ISR.
+p2.jpg          : photo de la camera J-SCAM.
+p3.jpg          : photo de la bodycam J-BWC.
+p4.jpg          : photo du kit J-CARE.
+
+AUCUN fichier requis : sans les fichiers, le site affiche les schenes vectoriels de secours (*-ph.svg). Depose simplement le fichier au bon nom et recharge la page.
+
+Conseils : photos sombres / haute definition pour rester coherent avec le theme ; les videos hero doivent etre 16:9 en boucle (manoeuvre, survol drone, plateau medical...).

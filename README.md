@@ -1,19 +1,22 @@
 # Jinim
 
-Site vitrine de Jinim — système d'exploitation souverain pour l'IA appliquée.
+Site vitrine de **Jinim** — voir, protéger, soigner.
+
+Jinim conçoit les équipements d'urgence qui équipent les armées, les forces de sécurité et les secours : drones de reconnaissance et de surveillance, caméras fixes et corporelles, équipements médicaux de soins rapides — ainsi que les logiciels **JCyber** (cybersécurité mobile) et **Jinim Lab** (formation gratuite aux métiers techniques).
 
 ## Structure du projet
 
 ```
 .
-├── index.html          Page principale
+├── index.html           Page principale (bilingue FR/EN)
 ├── css/
-│   └── style.css       Styles (thème noir / blanc / gris)
+│   └── style.css        Thème noir / blanc / accent
 ├── js/
-│   └── main.js         Interactions (modale de demande de démo)
+│   └── main.js          i18n FR/EN, navigation, modale de démo
 └── assets/
-    ├── jinim-logo.svg  Logo principal (blanc)
-    └── favicon.svg     Icône du site
+    ├── jinim-logo.svg   Logo principal (blanc)
+    ├── favicon.svg      Icône du site
+    └── media/           Placeholders SVG et médias réels (photos/vidéos)
 ```
 
 ## Développement local
