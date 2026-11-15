@@ -601,7 +601,7 @@
   var cyberGrid = document.querySelector('.cyber-grid');
   var cyberPhone = document.querySelector('.cyber-phone');
 
-  // Custom high-precision smooth scroll to target position
+  // Custom high-precision smooth scroll to target position (snappy & fluid)
   var activeScrollAnim = null;
   function smoothScrollTo(targetY, duration, callback) {
     if (activeScrollAnim) {
@@ -621,17 +621,17 @@
       return;
     }
     var startTime = null;
-    duration = duration || Math.min(1000, Math.max(500, Math.abs(distance) * 0.55));
+    duration = duration || Math.min(460, Math.max(260, Math.abs(distance) * 0.22));
 
-    function easeOutCubic(t) {
-      return 1 - Math.pow(1 - t, 3);
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
     }
 
     function step(timestamp) {
       if (!startTime) startTime = timestamp;
       var elapsed = timestamp - startTime;
       var progress = Math.min(elapsed / duration, 1);
-      var ease = easeOutCubic(progress);
+      var ease = easeOutQuart(progress);
       window.scrollTo(0, Math.round(startY + distance * ease));
       if (progress < 1) {
         activeScrollAnim = requestAnimationFrame(step);
@@ -658,7 +658,7 @@
       closeMegas();
       document.body.classList.remove('menu-open');
       if (burger) burger.classList.remove('open');
-      smoothScrollTo(0, 750, function() {
+      smoothScrollTo(0, 380, function() {
         if (history.pushState) history.pushState(null, '', window.location.pathname);
       });
       return;
@@ -674,7 +674,7 @@
       }
       var navHeight = header ? header.offsetHeight : 72;
       var targetY = Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
-      smoothScrollTo(targetY, 750, function() {
+      smoothScrollTo(targetY, 400, function() {
         if (!hasModalAction && history.pushState) history.pushState(null, '', href);
       });
     }
@@ -684,7 +684,7 @@
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      smoothScrollTo(0, 750);
+      smoothScrollTo(0, 380);
     });
   }
 
@@ -697,7 +697,7 @@
     var currentWheelY = targetWheelY;
     var isMomentumActive = false;
     var momentumRaf = null;
-    var lerpFactor = 0.085;
+    var lerpFactor = 0.22; // Snappy, responsive momentum without drag
 
     function momentumLoop() {
       var diff = targetWheelY - currentWheelY;
@@ -876,15 +876,15 @@
     if (section.id === 'cyber' && !animatedCounters.has('cyber')) {
       animatedCounters.add('cyber');
       var ringSpan = section.querySelector('.cp-ring span');
-      if (ringSpan) animateValue(ringSpan, 0, 95, 1400);
+      if (ringSpan) animateValue(ringSpan, 0, 95, 650);
     }
     if (section.id === 'lab' && !animatedCounters.has('lab')) {
       animatedCounters.add('lab');
       var statNums = section.querySelectorAll('.lab-stat-num');
-      if (statNums[0]) animateValue(statNums[0], 0, 10000, 1500, '', '+');
-      if (statNums[1]) animateValue(statNums[1], 0, 250, 1300, '', '+');
-      if (statNums[2]) animateValue(statNums[2], 0, 12, 1000, '', '');
-      if (statNums[3]) animateValue(statNums[3], 0, 100, 1200, '', ' %');
+      if (statNums[0]) animateValue(statNums[0], 0, 10000, 700, '', '+');
+      if (statNums[1]) animateValue(statNums[1], 0, 250, 600, '', '+');
+      if (statNums[2]) animateValue(statNums[2], 0, 12, 450, '', '');
+      if (statNums[3]) animateValue(statNums[3], 0, 100, 550, '', ' %');
     }
   }
 
