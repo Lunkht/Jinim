@@ -230,7 +230,8 @@
       'modal.opt3': 'Médical & soins rapides',
       'modal.opt4': 'Partenariat',
       'modal.send': 'Envoyer',
-      'modal.cancel': 'Annuler'
+      'modal.cancel': 'Annuler',
+      'nav.top': 'Haut de page'
     },
     en: {
       'meta.title': 'Jimin — The equipment that protects and heals',
@@ -459,7 +460,8 @@
       'modal.opt3': 'Medical & rapid care',
       'modal.opt4': 'Partnership',
       'modal.send': 'Send',
-      'modal.cancel': 'Cancel'
+      'modal.cancel': 'Cancel',
+      'nav.top': 'Back to top'
     }
   };
 
@@ -587,6 +589,340 @@
 
   window.openModal = openModal;
   window.closeModal = closeModal;
+
+  /* ---------- Smooth Scrolling & Navigation ---------- */
+  var isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var progressTrack = document.getElementById('progressTrack');
+  var backToTopBtn = document.getElementById('backToTop');
+  var heroSection = document.getElementById('top');
+  var missionSection = document.getElementById('mission');
+  var radarEl = document.querySelector('.radar');
+  var heroMedia = document.querySelector('.hero-media');
+  var cyberGrid = document.querySelector('.cyber-grid');
+  var cyberPhone = document.querySelector('.cyber-phone');
+
+  // Custom high-precision smooth scroll to target position
+  var activeScrollAnim = null;
+  function smoothScrollTo(targetY, duration, callback) {
+    if (activeScrollAnim) {
+      cancelAnimationFrame(activeScrollAnim);
+      activeScrollAnim = null;
+    }
+    if (isReducedMotion) {
+      window.scrollTo(0, targetY);
+      if (typeof callback === 'function') callback();
+      return;
+    }
+    var startY = window.pageYOffset || document.documentElement.scrollTop;
+    var distance = targetY - startY;
+    if (Math.abs(distance) < 2) {
+      window.scrollTo(0, targetY);
+      if (typeof callback === 'function') callback();
+      return;
+    }
+    var startTime = null;
+    duration = duration || Math.min(1000, Math.max(500, Math.abs(distance) * 0.55));
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var ease = easeOutCubic(progress);
+      window.scrollTo(0, Math.round(startY + distance * ease));
+      if (progress < 1) {
+        activeScrollAnim = requestAnimationFrame(step);
+      } else {
+        window.scrollTo(0, targetY);
+        activeScrollAnim = null;
+        if (typeof callback === 'function') callback();
+      }
+    }
+    activeScrollAnim = requestAnimationFrame(step);
+  }
+
+  // Intercept all internal anchor navigation for smooth scrolling with header offset
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    var hasModalAction = link.getAttribute('onclick') && link.getAttribute('onclick').indexOf('openModal') !== -1;
+
+    if (href === '#top') {
+      e.preventDefault();
+      closeMegas();
+      document.body.classList.remove('menu-open');
+      if (burger) burger.classList.remove('open');
+      smoothScrollTo(0, 750, function() {
+        if (history.pushState) history.pushState(null, '', window.location.pathname);
+      });
+      return;
+    }
+
+    var targetEl = document.querySelector(href);
+    if (targetEl) {
+      if (!hasModalAction) {
+        e.preventDefault();
+        closeMegas();
+        document.body.classList.remove('menu-open');
+        if (burger) burger.classList.remove('open');
+      }
+      var navHeight = header ? header.offsetHeight : 72;
+      var targetY = Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
+      smoothScrollTo(targetY, 750, function() {
+        if (!hasModalAction && history.pushState) history.pushState(null, '', href);
+      });
+    }
+  });
+
+  // Back to top floating button
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      smoothScrollTo(0, 750);
+    });
+  }
+
+  // Desktop Mouse Wheel Momentum Smoothing (fine pointer, non-trackpad)
+  (function initWheelMomentum() {
+    if (isReducedMotion) return;
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
+    var targetWheelY = window.pageYOffset;
+    var currentWheelY = targetWheelY;
+    var isMomentumActive = false;
+    var momentumRaf = null;
+    var lerpFactor = 0.085;
+
+    function momentumLoop() {
+      var diff = targetWheelY - currentWheelY;
+      if (Math.abs(diff) < 0.5) {
+        currentWheelY = targetWheelY;
+        window.scrollTo(0, currentWheelY);
+        isMomentumActive = false;
+        cancelAnimationFrame(momentumRaf);
+        momentumRaf = null;
+        return;
+      }
+      currentWheelY += diff * lerpFactor;
+      window.scrollTo(0, Math.round(currentWheelY));
+      momentumRaf = requestAnimationFrame(momentumLoop);
+    }
+
+    window.addEventListener('wheel', function(e) {
+      var modalOpen = document.getElementById('modalOverlay') && document.getElementById('modalOverlay').classList.contains('open');
+      if (modalOpen || document.body.classList.contains('menu-open') || e.target.closest('.modal, .nav-links, .mega')) {
+        targetWheelY = window.pageYOffset;
+        currentWheelY = targetWheelY;
+        return;
+      }
+
+      if (e.ctrlKey || e.altKey || Math.abs(e.deltaY) < 1) return;
+
+      var isTrackpad = (Math.abs(e.deltaY) < 40 && (e.deltaY % 1 !== 0 || Math.abs(e.deltaY) < 16));
+      if (isTrackpad) {
+        targetWheelY = window.pageYOffset;
+        currentWheelY = targetWheelY;
+        return;
+      }
+
+      var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      targetWheelY = Math.max(0, Math.min(maxScroll, targetWheelY + e.deltaY));
+
+      if (!isMomentumActive) {
+        isMomentumActive = true;
+        currentWheelY = window.pageYOffset;
+        momentumRaf = requestAnimationFrame(momentumLoop);
+      }
+      e.preventDefault();
+    }, { passive: false });
+
+    window.addEventListener('scroll', function() {
+      if (!isMomentumActive) {
+        targetWheelY = window.pageYOffset;
+        currentWheelY = targetWheelY;
+      }
+    }, { passive: true });
+  })();
+
+  /* ---------- Scroll HUD & Zoom Transition Controller ---------- */
+  var ticking = false;
+
+  function onScrollFrame() {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    // 1. Update Scroll Progress HUD
+    if (progressTrack && docHeight > 0) {
+      var progress = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
+      progressTrack.style.width = progress + '%';
+    }
+
+    // 2. Back to top visibility
+    if (backToTopBtn) {
+      if (scrollY > 400) backToTopBtn.classList.add('visible');
+      else backToTopBtn.classList.remove('visible');
+    }
+
+    // 3. Hero Section Parallax Zoom
+    if (!isReducedMotion && heroSection) {
+      var heroHeight = heroSection.offsetHeight || 700;
+      if (scrollY <= heroHeight) {
+        var heroRatio = Math.min(1, Math.max(0, scrollY / heroHeight));
+        if (radarEl) {
+          radarEl.style.transform = 'scale(' + (1 + heroRatio * 0.22) + ') translate3d(0, ' + (heroRatio * 45) + 'px, 0)';
+          radarEl.style.opacity = (1 - heroRatio * 0.7);
+        }
+        if (heroMedia) {
+          var bgImg = heroMedia.querySelector('.media-bg');
+          if (bgImg) bgImg.style.transform = 'scale(' + (1 + heroRatio * 0.1) + ') translate3d(0, ' + (heroRatio * 25) + 'px, 0)';
+        }
+      }
+    }
+
+    // 4. Mission Section Parallax Zoom
+    if (!isReducedMotion && missionSection) {
+      var mRect = missionSection.getBoundingClientRect();
+      if (mRect.top < window.innerHeight && mRect.bottom > 0) {
+        var mProgress = (window.innerHeight - mRect.top) / (window.innerHeight + mRect.height);
+        var mediaEl = missionSection.querySelector('.media-bg');
+        if (mediaEl && missionSection.classList.contains('is-in-view')) {
+          var scaleVal = 1 + Math.max(0, (mProgress - 0.3) * 0.08);
+          mediaEl.style.transform = 'scale(' + scaleVal + ')';
+        }
+      }
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(onScrollFrame);
+      ticking = true;
+    }
+  }, { passive: true });
+  onScrollFrame();
+
+  /* ---------- Interactive 3D Phone Tilt & Zoom (Cyber Section) ---------- */
+  if (!isReducedMotion && cyberGrid && cyberPhone) {
+    cyberGrid.addEventListener('mousemove', function(e) {
+      if (window.innerWidth <= 920) return;
+      var rect = cyberPhone.getBoundingClientRect();
+      var centerX = rect.left + rect.width / 2;
+      var centerY = rect.top + rect.height / 2;
+      var deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
+      var deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
+      var rotateY = deltaX * 12;
+      var rotateX = -deltaY * 12;
+      cyberPhone.style.transform = 'perspective(900px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) scale(1.04) translateY(-4px)';
+    });
+
+    cyberGrid.addEventListener('mouseleave', function() {
+      cyberPhone.style.transform = '';
+    });
+  }
+
+  /* ---------- IntersectionObserver for Section Zooms & Reveals ---------- */
+  function assignStagger(selector, maxStagger) {
+    var containers = document.querySelectorAll(selector);
+    for (var c = 0; c < containers.length; c++) {
+      var children = containers[c].children;
+      for (var i = 0; i < children.length; i++) {
+        var sIndex = (i % (maxStagger || 4)) + 1;
+        children[i].classList.add('stagger-' + sIndex);
+      }
+    }
+  }
+  assignStagger('.product-grid', 4);
+  assignStagger('.ind-grid', 3);
+  assignStagger('.ind-stats', 4);
+  assignStagger('.cyber-feats', 4);
+  assignStagger('.lab-feats', 5);
+  assignStagger('.lab-stats', 4);
+  assignStagger('.hero-stats', 3);
+
+  // Number Counter Animation Helper
+  function animateValue(el, start, end, duration, prefix, suffix) {
+    if (isReducedMotion) {
+      el.textContent = (prefix || '') + end + (suffix || '');
+      return;
+    }
+    var startTime = null;
+    duration = duration || 1200;
+    function countStep(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(start + (end - start) * ease);
+      el.textContent = (prefix || '') + current.toLocaleString('fr-FR') + (suffix || '');
+      if (progress < 1) {
+        requestAnimationFrame(countStep);
+      } else {
+        el.textContent = (prefix || '') + end.toLocaleString('fr-FR') + (suffix || '');
+      }
+    }
+    requestAnimationFrame(countStep);
+  }
+
+  var animatedCounters = new Set();
+  function triggerCounters(section) {
+    if (section.id === 'cyber' && !animatedCounters.has('cyber')) {
+      animatedCounters.add('cyber');
+      var ringSpan = section.querySelector('.cp-ring span');
+      if (ringSpan) animateValue(ringSpan, 0, 95, 1400);
+    }
+    if (section.id === 'lab' && !animatedCounters.has('lab')) {
+      animatedCounters.add('lab');
+      var statNums = section.querySelectorAll('.lab-stat-num');
+      if (statNums[0]) animateValue(statNums[0], 0, 10000, 1500, '', '+');
+      if (statNums[1]) animateValue(statNums[1], 0, 250, 1300, '', '+');
+      if (statNums[2]) animateValue(statNums[2], 0, 12, 1000, '', '');
+      if (statNums[3]) animateValue(statNums[3], 0, 100, 1200, '', ' %');
+    }
+  }
+
+  // Section observer for zoom transitions
+  var zoomSections = document.querySelectorAll('.zoom-hero, .zoom-mission, .zoom-products, .zoom-architecture, .zoom-industries, .zoom-ecosystem, .zoom-cyber, .zoom-lab, .zoom-cta');
+  if ('IntersectionObserver' in window) {
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      for (var s = 0; s < entries.length; s++) {
+        if (entries[s].isIntersecting) {
+          entries[s].target.classList.add('is-in-view');
+          triggerCounters(entries[s].target);
+        }
+      }
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    for (var z = 0; z < zoomSections.length; z++) {
+      sectionObserver.observe(zoomSections[z]);
+    }
+
+    // Element reveal observer
+    var revealElements = document.querySelectorAll('.product-card, .layer, .ind-card, .ind-stat, .cyber-feat, .lab-feats li, .lab-stat, .hero-stat');
+    var elementObserver = new IntersectionObserver(function(entries, observer) {
+      for (var e = 0; e < entries.length; e++) {
+        if (entries[e].isIntersecting) {
+          entries[e].target.classList.add('is-revealed');
+          observer.unobserve(entries[e].target);
+        }
+      }
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    for (var r = 0; r < revealElements.length; r++) {
+      elementObserver.observe(revealElements[r]);
+    }
+  } else {
+    for (var i = 0; i < zoomSections.length; i++) zoomSections[i].classList.add('is-in-view');
+    var allItems = document.querySelectorAll('.product-card, .layer, .ind-card, .ind-stat, .cyber-feat, .lab-feats li, .lab-stat, .hero-stat');
+    for (var j = 0; j < allItems.length; j++) allItems[j].classList.add('is-revealed');
+  }
 
   applyLang();
 })();

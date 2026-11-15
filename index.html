@@ -10,9 +10,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
+
+<!-- HUD Scroll Progress Indicator -->
+<div class="scroll-progress-hud" id="scrollProgress" aria-hidden="true">
+  <div class="progress-track" id="progressTrack"></div>
+</div>
 
 <header class="navbar" id="navbar">
   <div class="nav-wrap">
@@ -127,7 +132,7 @@
   </div>
 </header>
 
-<section class="hero" id="top">
+<section class="hero zoom-hero" id="top">
   <div class="hero-media" aria-hidden="true">
     <img class="media-bg" src="assets/media/hero-ph.svg" alt="" aria-hidden="true">
     <video class="media-real hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/media/hero.jpg" src="assets/media/hero.mp4" onerror="this.style.display='none'"></video>
@@ -172,7 +177,7 @@
   </div>
 </section>
 
-<section class="mission-hero" id="mission">
+<section class="mission-hero zoom-mission" id="mission">
   <div class="mission-media" aria-hidden="true">
     <img class="media-bg" src="assets/media/mission-ph.svg" alt="" aria-hidden="true">
     <img class="media-real" src="assets/media/mission.jpg" alt="" onerror="this.style.display='none'">
@@ -191,7 +196,7 @@
   </div>
 </section>
 
-<section class="products" id="products">
+<section class="products zoom-products" id="products">
   <div class="wrap">
     <div class="products-head-row">
       <div class="products-title">
@@ -287,7 +292,7 @@
   </div>
 </section>
 
-<section class="architecture" id="architecture">
+<section class="architecture zoom-architecture" id="architecture">
   <div class="wrap arch-grid">
     <div class="arch-head">
       <div class="label">Architecture</div>
@@ -315,7 +320,7 @@
   </div>
 </section>
 
-<section class="industries" id="industries">
+<section class="industries zoom-industries" id="industries">
   <div class="wrap">
     <div class="ind-head-row">
       <div class="ind-title">
@@ -394,7 +399,7 @@
   </div>
 </section>
 
-<section class="ecosystem" id="ecosystem">
+<section class="ecosystem zoom-ecosystem" id="ecosystem">
   <div class="wrap eco-grid">
     <div class="eco-copy">
       <div class="sub-title" data-i18n="eco.label">Écosystème</div>
@@ -435,7 +440,7 @@
   </div>
 </section>
 
-<section class="cyber" id="cyber">
+<section class="cyber zoom-cyber" id="cyber">
   <div class="wrap">
     <div class="cyber-head-row">
       <div class="cyber-title">
@@ -519,7 +524,7 @@
   </div>
 </section>
 
-<section class="lab" id="lab">
+<section class="lab zoom-lab" id="lab">
   <div class="wrap">
     <div class="lab-head-row">
       <div class="lab-title">
@@ -592,7 +597,7 @@
   </div>
 </section>
 
-<section class="cta" id="demo">
+<section class="cta zoom-cta" id="demo">
   <div class="cta-grid">
     <div class="cta-panel deploy-panel">
       <div class="sub-title" data-i18n="cta.deploy.label">Première ligne</div>
@@ -692,7 +697,15 @@
   </div>
 </div>
 
-<script src="js/main.js?v=4"></script>
+<!-- Back to top floating button -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Retour en haut de page" data-i18n-aria="nav.top">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+    <path d="M7 11.5V2.5M2.5 7L7 2.5L11.5 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>TOP</span>
+</button>
+
+<script src="js/main.js?v=5"></script>
 
 </body>
 </html>

@@ -19,7 +19,13 @@
 }
 
 *{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:80px;
+}
+section, footer, [id]{
+  scroll-margin-top:80px;
+}
 body{
   background:var(--bg);
   color:var(--text);
@@ -773,4 +779,520 @@ footer{padding:70px 0 34px;}
   .cyber-feats{grid-template-columns:1fr;}
   .lab-stat-num{font-size:2rem;}
   .hero-actions .btn{width:100%;}
+}
+
+/* ==========================================================================
+   SMOOTH SCROLLING, SCROLL HUD & BACK TO TOP
+   ========================================================================== */
+
+/* Scroll Progress HUD Bar */
+.scroll-progress-hud{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  background:rgba(255,255,255,0.04);
+  z-index:999;
+  pointer-events:none;
+}
+.scroll-progress-hud .progress-track{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg, #7FD59B 0%, #FFFFFF 70%, #7FD59B 100%);
+  box-shadow:0 0 12px rgba(127,213,155,0.8), 0 0 4px #FFFFFF;
+  transition:width 0.08s ease-out;
+  will-change:width;
+}
+
+/* Back to Top floating button */
+.back-to-top{
+  position:fixed;
+  bottom:28px;
+  right:28px;
+  z-index:55;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(14,14,14,0.88);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:10px 14px;
+  border-radius:2px;
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(14px) scale(0.92);
+  transition:opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5);
+}
+.back-to-top.visible{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+}
+.back-to-top:hover{
+  background:var(--surface-2);
+  border-color:var(--accent);
+  color:#FFFFFF;
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 12px 28px rgba(0,0,0,0.6), 0 0 12px rgba(127,213,155,0.2);
+}
+.back-to-top svg{
+  transition:transform 0.25s ease;
+}
+.back-to-top:hover svg{
+  transform:translateY(-2px);
+}
+
+/* ==========================================================================
+   SCROLL-DRIVEN REVEALS & ZOOM TRANSITIONS
+   ========================================================================== */
+
+/* Reveal base classes */
+.reveal-item{
+  opacity:0;
+  will-change:transform, opacity;
+  transition:opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-up{
+  transform:translateY(36px);
+}
+.reveal-up.is-revealed{
+  opacity:1;
+  transform:translateY(0);
+}
+.reveal-zoom{
+  transform:scale(0.92) translateY(20px);
+}
+.reveal-zoom.is-revealed{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.reveal-fade{
+  transform:none;
+}
+.reveal-fade.is-revealed{
+  opacity:1;
+}
+
+/* Stagger delays */
+.stagger-1{ transition-delay:0.08s; }
+.stagger-2{ transition-delay:0.16s; }
+.stagger-3{ transition-delay:0.24s; }
+.stagger-4{ transition-delay:0.32s; }
+.stagger-5{ transition-delay:0.40s; }
+.stagger-6{ transition-delay:0.48s; }
+.stagger-7{ transition-delay:0.56s; }
+.stagger-8{ transition-delay:0.64s; }
+
+/* --------------------------------------------------------------------------
+   1. HERO SECTION: Parallax Zoom Depth
+   -------------------------------------------------------------------------- */
+.hero{
+  perspective:1000px;
+}
+.hero-media{
+  transition:transform 0.15s ease-out;
+  will-change:transform;
+}
+.hero-media .media-bg,
+.hero-media .hero-video{
+  transition:transform 0.2s ease-out;
+  will-change:transform;
+}
+.radar{
+  transition:transform 0.2s ease-out, opacity 0.25s ease-out;
+  will-change:transform, opacity;
+}
+.hero-stat{
+  opacity:0;
+  transform:scale(0.92) translateY(20px);
+  transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-stat.is-revealed{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   2. MISSION SECTION: Cinematic Deep Zoom Entrance & Parallax
+   -------------------------------------------------------------------------- */
+.mission-hero{
+  position:relative;
+  overflow:hidden;
+}
+.mission-hero .mission-media{
+  overflow:hidden;
+}
+.mission-hero .media-bg,
+.mission-hero .media-real{
+  transform:scale(1.18);
+  transition:transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  will-change:transform;
+}
+.mission-hero.is-in-view .media-bg,
+.mission-hero.is-in-view .media-real{
+  transform:scale(1);
+}
+.mission-row{
+  opacity:0;
+  transform:scale(0.94) translateY(28px);
+  transition:transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+              opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+  will-change:transform, opacity;
+}
+.mission-hero.is-in-view .mission-row{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   3. PRODUCTS SECTION: Tactical Optical Zoom & Viewfinder HUD
+   -------------------------------------------------------------------------- */
+.products-head-row{
+  opacity:0;
+  transform:translateY(24px) scale(0.98);
+  transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.products.is-in-view .products-head-row{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+.product-card{
+  opacity:0;
+  transform:scale(0.93) translateY(28px);
+  transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+  will-change:transform, opacity;
+}
+.product-card.is-revealed{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.product-card:hover{
+  background:var(--surface);
+  transform:translateY(-6px) scale(1.015);
+  box-shadow:0 20px 45px rgba(0,0,0,0.5), 0 0 1px 1px rgba(255,255,255,0.12);
+  z-index:2;
+}
+.p-media{
+  position:relative;
+  overflow:hidden;
+}
+/* Viewfinder corner brackets */
+.p-media::before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  pointer-events:none;
+  z-index:3;
+  opacity:0;
+  transform:scale(1.1);
+  transition:opacity 0.35s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background:
+    linear-gradient(to right, #7FD59B 2px, transparent 2px) 0 0,
+    linear-gradient(to bottom, #7FD59B 2px, transparent 2px) 0 0,
+    linear-gradient(to left, #7FD59B 2px, transparent 2px) 100% 0,
+    linear-gradient(to bottom, #7FD59B 2px, transparent 2px) 100% 0,
+    linear-gradient(to right, #7FD59B 2px, transparent 2px) 0 100%,
+    linear-gradient(to top, #7FD59B 2px, transparent 2px) 0 100%,
+    linear-gradient(to left, #7FD59B 2px, transparent 2px) 100% 100%,
+    linear-gradient(to top, #7FD59B 2px, transparent 2px) 100% 100%;
+  background-repeat:no-repeat;
+  background-size:16px 16px;
+}
+/* Viewfinder HUD optical zoom badge */
+.p-media::after{
+  content:"OPTICAL ZOOM // ISR 2.4X";
+  position:absolute;
+  bottom:12px;
+  right:12px;
+  z-index:4;
+  font-family:var(--font-mono);
+  font-size:0.62rem;
+  letter-spacing:0.14em;
+  color:#7FD59B;
+  background:rgba(5,5,5,0.82);
+  padding:3px 8px;
+  border-radius:2px;
+  border:1px solid rgba(127,213,155,0.35);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity 0.3s ease, transform 0.3s ease;
+  pointer-events:none;
+}
+.product-card:hover .p-media::before{
+  opacity:1;
+  transform:scale(1);
+}
+.product-card:hover .p-media::after{
+  opacity:1;
+  transform:translateY(0);
+}
+.p-media img{
+  transform-origin:center center;
+  transition:transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease, opacity 0.3s ease;
+  will-change:transform;
+}
+.product-card:hover .p-media img{
+  transform:scale(1.12);
+}
+
+/* --------------------------------------------------------------------------
+   4. ARCHITECTURE SECTION: Layer Zoom & Interactive Expansion
+   -------------------------------------------------------------------------- */
+.arch-head{
+  opacity:0;
+  transform:translateY(24px) scale(0.97);
+  transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.architecture.is-in-view .arch-head{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+.layer{
+  opacity:0;
+  transform:scale(0.94) translateX(-14px);
+  transition:transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+  will-change:transform, opacity;
+}
+.layer.is-revealed{
+  opacity:1;
+  transform:scale(1) translateX(0);
+}
+.layer:hover{
+  transform:scale(1.02) translateX(8px);
+  background:var(--surface);
+  border-color:var(--accent);
+  box-shadow:0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* --------------------------------------------------------------------------
+   5. INDUSTRIES SECTION: Card Zoom & Metrics Entrance
+   -------------------------------------------------------------------------- */
+.ind-card{
+  opacity:0;
+  transform:scale(0.93) translateY(24px);
+  transition:transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease;
+  will-change:transform, opacity;
+}
+.ind-card.is-revealed{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.ind-card:hover{
+  transform:translateY(-5px) scale(1.02);
+  background:var(--surface);
+  border-color:var(--text-dim);
+}
+.ind-stat{
+  opacity:0;
+  transform:scale(0.92) translateY(16px);
+  transition:transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ind-stat.is-revealed{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   6. CYBER SECTION: 3D Phone Zoom & Interactive Tilt
+   -------------------------------------------------------------------------- */
+.cyber-phone{
+  opacity:0;
+  transform:scale(0.82) translateY(44px);
+  transition:transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
+  transform-origin:center center;
+  will-change:transform;
+}
+.cyber.is-in-view .cyber-phone{
+  opacity:1;
+  transform:scale(1) translateY(0);
+  box-shadow:0 28px 70px rgba(0,0,0,0.7), 0 0 40px rgba(127,213,155,0.1);
+}
+.cyber-phone:hover{
+  transform:scale(1.04) translateY(-4px);
+}
+.cp-ring{
+  transform:scale(0.65);
+  transition:transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
+}
+.cyber.is-in-view .cp-ring{
+  transform:scale(1);
+}
+.cyber-feat{
+  opacity:0;
+  transform:scale(0.93) translateY(20px);
+  transition:transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+  will-change:transform, opacity;
+}
+.cyber-feat.is-revealed{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.cyber-feat:hover{
+  transform:scale(1.03) translateY(-3px);
+  background:var(--surface);
+  border-color:var(--text-dim);
+  box-shadow:0 8px 24px rgba(0,0,0,0.35);
+}
+.cyber-feat:hover .feat-ico svg{
+  transform:scale(1.18);
+}
+.feat-ico svg{
+  transition:transform 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   7. LAB SECTION: Terminal Console Zoom & Progress Animation
+   -------------------------------------------------------------------------- */
+.lab-term{
+  opacity:0;
+  transform:scale(0.88) translateY(36px);
+  transition:transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease;
+  will-change:transform;
+}
+.lab.is-in-view .lab-term{
+  opacity:1;
+  transform:scale(1) translateY(0);
+  box-shadow:0 24px 60px rgba(0,0,0,0.55), 0 0 30px rgba(255,255,255,0.03);
+}
+.lab-term:hover{
+  transform:scale(1.02);
+}
+.lab-prog::before{
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+.lab.is-in-view .lab-prog::before{
+  transform:scaleX(1);
+}
+.lab-feats li{
+  opacity:0;
+  transform:scale(0.95) translateX(16px);
+  transition:transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease;
+  will-change:transform, opacity;
+}
+.lab-feats li.is-revealed{
+  opacity:1;
+  transform:scale(1) translateX(0);
+}
+.lab-feats li:hover{
+  transform:scale(1.02) translateX(4px);
+  background:var(--surface);
+  border-color:var(--moss);
+}
+.lab-stat{
+  opacity:0;
+  transform:scale(0.92) translateY(18px);
+  transition:transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lab-stat.is-revealed{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   8. CTA SECTION: Spotlight Command Panels Zoom
+   -------------------------------------------------------------------------- */
+.cta-panel{
+  opacity:0;
+  transform:scale(0.93) translateY(24px);
+  transition:transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease;
+  will-change:transform;
+}
+.cta.is-in-view .cta-panel{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.cta.is-in-view .cta-panel:nth-child(2){
+  transition-delay:0.15s;
+}
+.cta-panel:hover{
+  transform:scale(1.012);
+  z-index:1;
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY: Reduced Motion Fallbacks
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce){
+  html{
+    scroll-behavior:auto !important;
+  }
+  .reveal-item,
+  .product-card,
+  .layer,
+  .ind-card,
+  .ind-stat,
+  .cyber-phone,
+  .cyber-feat,
+  .lab-term,
+  .lab-feats li,
+  .lab-stat,
+  .cta-panel,
+  .mission-row,
+  .mission-hero .media-bg,
+  .mission-hero .media-real,
+  .p-media img,
+  .p-media::before,
+  .p-media::after,
+  .radar,
+  .hero-stat,
+  .cp-ring{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+    animation:none !important;
+  }
+  .lab-prog::before{
+    transform:none !important;
+  }
+  .back-to-top{
+    transition:opacity 0.15s linear !important;
+    transform:none !important;
+  }
 }
