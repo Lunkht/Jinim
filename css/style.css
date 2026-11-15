@@ -91,18 +91,10 @@ p{color:var(--text-muted); max-width:52ch;}
 /* ---------- NAV ---------- */
 .navbar{
   position:sticky; top:0; z-index:60;
-  background:transparent;
+  background:linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
   border-bottom:1px solid transparent;
   transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
 }
-.navbar::before{
-  content:""; position:absolute; top:0; left:0; right:0; height:150px;
-  background:linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0) 100%);
-  pointer-events:none;
-  z-index:-1;
-  transition:opacity .3s ease;
-}
-.navbar.scrolled::before{opacity:0;}
 .navbar.scrolled{
   background:rgba(5,5,5,0.82);
   backdrop-filter:blur(12px);
