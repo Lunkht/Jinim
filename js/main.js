@@ -621,7 +621,7 @@
   var cyberGrid = document.querySelector('.cyber-grid');
   var cyberPhone = document.querySelector('.cyber-phone');
 
-  // Custom high-precision smooth scroll to target position (snappy & fluid)
+  // Custom high-precision smooth scroll for anchor navigation (fast & snappy)
   var activeScrollAnim = null;
   function smoothScrollTo(targetY, duration, callback) {
     if (activeScrollAnim) {
@@ -641,7 +641,7 @@
       return;
     }
     var startTime = null;
-    duration = duration || Math.min(460, Math.max(260, Math.abs(distance) * 0.22));
+    duration = duration || Math.min(320, Math.max(180, Math.abs(distance) * 0.15));
 
     function easeOutQuart(t) {
       return 1 - Math.pow(1 - t, 4);
@@ -664,7 +664,7 @@
     activeScrollAnim = requestAnimationFrame(step);
   }
 
-  // Intercept all internal anchor navigation for smooth scrolling with header offset
+  // Intercept internal anchor navigation for instant & smooth section jump
   document.addEventListener('click', function(e) {
     var link = e.target.closest('a[href^="#"]');
     if (!link) return;
@@ -678,7 +678,7 @@
       closeMegas();
       document.body.classList.remove('menu-open');
       if (burger) burger.classList.remove('open');
-      smoothScrollTo(0, 380, function() {
+      smoothScrollTo(0, 260, function() {
         if (history.pushState) history.pushState(null, '', window.location.pathname);
       });
       return;
@@ -694,7 +694,7 @@
       }
       var navHeight = header ? header.offsetHeight : 72;
       var targetY = Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight);
-      smoothScrollTo(targetY, 400, function() {
+      smoothScrollTo(targetY, 280, function() {
         if (!hasModalAction && history.pushState) history.pushState(null, '', href);
       });
     }
@@ -704,71 +704,9 @@
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      smoothScrollTo(0, 380);
+      smoothScrollTo(0, 260);
     });
   }
-
-  // Desktop Mouse Wheel Momentum Smoothing (fine pointer, non-trackpad)
-  (function initWheelMomentum() {
-    if (isReducedMotion) return;
-    if (!window.matchMedia('(pointer: fine)').matches) return;
-
-    var targetWheelY = window.pageYOffset;
-    var currentWheelY = targetWheelY;
-    var isMomentumActive = false;
-    var momentumRaf = null;
-    var lerpFactor = 0.22; // Snappy, responsive momentum without drag
-
-    function momentumLoop() {
-      var diff = targetWheelY - currentWheelY;
-      if (Math.abs(diff) < 0.5) {
-        currentWheelY = targetWheelY;
-        window.scrollTo(0, currentWheelY);
-        isMomentumActive = false;
-        cancelAnimationFrame(momentumRaf);
-        momentumRaf = null;
-        return;
-      }
-      currentWheelY += diff * lerpFactor;
-      window.scrollTo(0, Math.round(currentWheelY));
-      momentumRaf = requestAnimationFrame(momentumLoop);
-    }
-
-    window.addEventListener('wheel', function(e) {
-      var modalOpen = document.getElementById('modalOverlay') && document.getElementById('modalOverlay').classList.contains('open');
-      if (modalOpen || document.body.classList.contains('menu-open') || e.target.closest('.modal, .nav-links, .mega')) {
-        targetWheelY = window.pageYOffset;
-        currentWheelY = targetWheelY;
-        return;
-      }
-
-      if (e.ctrlKey || e.altKey || Math.abs(e.deltaY) < 1) return;
-
-      var isTrackpad = (Math.abs(e.deltaY) < 40 && (e.deltaY % 1 !== 0 || Math.abs(e.deltaY) < 16));
-      if (isTrackpad) {
-        targetWheelY = window.pageYOffset;
-        currentWheelY = targetWheelY;
-        return;
-      }
-
-      var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-      targetWheelY = Math.max(0, Math.min(maxScroll, targetWheelY + e.deltaY));
-
-      if (!isMomentumActive) {
-        isMomentumActive = true;
-        currentWheelY = window.pageYOffset;
-        momentumRaf = requestAnimationFrame(momentumLoop);
-      }
-      e.preventDefault();
-    }, { passive: false });
-
-    window.addEventListener('scroll', function() {
-      if (!isMomentumActive) {
-        targetWheelY = window.pageYOffset;
-        currentWheelY = targetWheelY;
-      }
-    }, { passive: true });
-  })();
 
   /* ---------- Scroll HUD & Zoom Transition Controller ---------- */
   var ticking = false;
