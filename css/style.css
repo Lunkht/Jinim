@@ -782,6 +782,87 @@ footer{padding:70px 0 34px;}
 }
 
 /* ==========================================================================
+   CUSTOM CURSOR
+   ========================================================================== */
+@media (pointer: fine) {
+  body { cursor: none !important; }
+  a, button, [role="button"], input, select, label { cursor: none !important; }
+
+  .cur {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+  }
+  /* Outer ring */
+  .cur-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width .22s cubic-bezier(.16,1,.3,1),
+                height .22s cubic-bezier(.16,1,.3,1),
+                border-color .18s ease,
+                opacity .18s ease;
+  }
+  /* Inner dot */
+  .cur-dot {
+    width: 5px; height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width .12s ease, height .12s ease, background .12s ease;
+  }
+  /* Crosshair lines */
+  .cur-cross {
+    width: 36px; height: 36px;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity .18s ease;
+  }
+  .cur-cross::before,
+  .cur-cross::after {
+    content: "";
+    position: absolute;
+    background: rgba(127,213,155,0.6);
+  }
+  .cur-cross::before { width: 1px; height: 10px; left: 50%; top: 2px; transform: translateX(-50%); }
+  .cur-cross::after  { width: 10px; height: 1px; top: 50%; left: 2px; transform: translateY(-50%); }
+
+  /* Interactive states */
+  body.cur-hover .cur-ring {
+    width: 52px; height: 52px;
+    border-color: rgba(127,213,155,0.7);
+  }
+  body.cur-hover .cur-dot {
+    width: 8px; height: 8px;
+    background: #7FD59B;
+  }
+  body.cur-hover .cur-cross { opacity: 1; }
+  body.cur-click .cur-ring {
+    width: 24px; height: 24px;
+    border-color: #fff;
+  }
+}
+
+/* ==========================================================================
+   RIPPLE EFFECT ON BUTTONS
+   ========================================================================== */
+.btn { overflow: hidden; position: relative; }
+.ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  transform: scale(0);
+  animation: ripple-anim 0.52s cubic-bezier(0,0,0.2,1) forwards;
+  pointer-events: none;
+}
+@keyframes ripple-anim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ==========================================================================
    SMOOTH SCROLLING, SCROLL HUD & BACK TO TOP
    ========================================================================== */
 
@@ -1256,6 +1337,249 @@ footer{padding:70px 0 34px;}
   z-index:1;
 }
 
+/* ==========================================================================
+   TILT 3D PRODUCT CARDS (JS-driven via inline style)
+   ========================================================================== */
+.product-card {
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+/* Inner wrap for real 3D tilt */
+.product-card-inner {
+  transition: transform 0.08s ease-out;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* ==========================================================================
+   SCAN LINE SHIMMER on cards
+   ========================================================================== */
+.product-card::after,
+.ind-card::after,
+.cyber-feat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255,255,255,0.03) 50%,
+    transparent 100%
+  );
+  background-size: 100% 60px;
+  opacity: 0;
+  transition: opacity .22s ease;
+  z-index: 10;
+  animation: none;
+}
+.product-card:hover::after,
+.ind-card:hover::after,
+.cyber-feat:hover::after {
+  opacity: 1;
+  animation: scan-line 1.4s linear infinite;
+}
+@keyframes scan-line {
+  0%   { background-position: 0 -60px; }
+  100% { background-position: 0 100%; }
+}
+
+/* ==========================================================================
+   ICON GLOW on hover
+   ========================================================================== */
+.p-icon,
+.ind-icon,
+.feat-ico {
+  transition: border-color .22s ease, box-shadow .22s ease, transform .22s cubic-bezier(.16,1,.3,1);
+}
+.product-card:hover .p-icon,
+.ind-card:hover .ind-icon,
+.cyber-feat:hover .feat-ico {
+  border-color: rgba(127,213,155,0.6);
+  box-shadow: 0 0 14px rgba(127,213,155,0.25), inset 0 0 10px rgba(127,213,155,0.08);
+  transform: scale(1.1) rotate(-3deg);
+}
+.ind-icon svg,
+.feat-ico svg {
+  transition: transform .22s cubic-bezier(.16,1,.3,1), color .18s ease;
+}
+.ind-card:hover .ind-icon svg {
+  transform: scale(1.15);
+}
+
+/* ==========================================================================
+   NAV LINK ACTIVE INDICATOR
+   ========================================================================== */
+.nav-list a,
+.nav-mega-trigger {
+  position: relative;
+}
+.nav-list a::after,
+.nav-mega-trigger::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width .22s cubic-bezier(.16,1,.3,1);
+}
+.nav-list a:hover::after,
+.nav-mega-trigger:hover::after,
+.nav-list a.active::after {
+  width: 100%;
+}
+
+/* ==========================================================================
+   FOOTER LINKS HOVER
+   ========================================================================== */
+.footer-col a {
+  position: relative;
+  transition: color .15s ease, padding-left .18s ease;
+}
+.footer-col a:hover {
+  padding-left: 10px;
+  color: var(--text);
+}
+.footer-col a::before {
+  content: "—";
+  position: absolute;
+  left: -4px;
+  opacity: 0;
+  color: var(--moss);
+  transition: opacity .15s ease, left .18s ease;
+}
+.footer-col a:hover::before {
+  left: 0;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   HERO CONSOLE TYPEWRITER CURSOR
+   ========================================================================== */
+.console-readout::after {
+  content: "_";
+  animation: blink-cur 1s step-end infinite;
+  color: #7FD59B;
+  margin-left: 2px;
+}
+@keyframes blink-cur {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ==========================================================================
+   HERO STAT HOVER
+   ========================================================================== */
+.hero-stat {
+  transition: transform 0.42s cubic-bezier(0.16,1,0.3,1),
+              opacity   0.42s cubic-bezier(0.16,1,0.3,1),
+              background .18s ease,
+              border-color .18s ease;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 12px;
+  margin: -12px;
+}
+.hero-stat:hover {
+  background: rgba(255,255,255,0.03);
+  border-color: var(--border);
+}
+
+/* ==========================================================================
+   LAYER HOVER LEFT-BORDER ACCENT
+   ========================================================================== */
+.layer {
+  border-left: 2px solid transparent;
+  transition: transform 0.38s cubic-bezier(0.16,1,0.3,1),
+              opacity 0.38s cubic-bezier(0.16,1,0.3,1),
+              background .2s ease,
+              border-color .2s ease,
+              box-shadow .2s ease;
+}
+.layer:hover {
+  border-left-color: var(--moss);
+}
+
+/* ==========================================================================
+   SPEC TAGS HOVER (product card)
+   ========================================================================== */
+.p-specs li {
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+  cursor: default;
+}
+.p-specs li:hover {
+  border-color: rgba(127,213,155,0.5);
+  color: #7FD59B;
+  background: rgba(127,213,155,0.06);
+}
+
+/* ==========================================================================
+   CP-FEED LIVE PULSE (Cyber section)
+   ========================================================================== */
+.cp-feed-item .dot {
+  animation: live-pulse 2s ease-in-out infinite;
+}
+.cp-feed-item.warn .dot {
+  animation: warn-pulse 1.5s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(127,213,155,0.6); }
+  50%       { box-shadow: 0 0 0 4px rgba(127,213,155,0); }
+}
+@keyframes warn-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,93,91,0.7); }
+  50%       { box-shadow: 0 0 0 5px rgba(201,93,91,0); }
+}
+
+/* ==========================================================================
+   LAB PROGRESS BAR SHIMMER
+   ========================================================================== */
+.lab-prog::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -40%;
+  width: 40%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: prog-shimmer 2.2s ease-in-out infinite;
+}
+.lab-prog { position: relative; overflow: hidden; }
+@keyframes prog-shimmer {
+  0%   { left: -40%; }
+  100% { left: 110%; }
+}
+
+/* ==========================================================================
+   CTA PANEL: CORNER BRACKETS ON HOVER
+   ========================================================================== */
+.cta-panel {
+  position: relative;
+}
+.cta-panel::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity .25s ease, transform .25s cubic-bezier(.16,1,.3,1);
+  background:
+    linear-gradient(to right,  rgba(127,213,155,0.5) 2px, transparent 2px) 0 0,
+    linear-gradient(to bottom, rgba(127,213,155,0.5) 2px, transparent 2px) 0 0,
+    linear-gradient(to left,   rgba(127,213,155,0.5) 2px, transparent 2px) 100% 0,
+    linear-gradient(to bottom, rgba(127,213,155,0.5) 2px, transparent 2px) 100% 0,
+    linear-gradient(to right,  rgba(127,213,155,0.5) 2px, transparent 2px) 0 100%,
+    linear-gradient(to top,    rgba(127,213,155,0.5) 2px, transparent 2px) 0 100%,
+    linear-gradient(to left,   rgba(127,213,155,0.5) 2px, transparent 2px) 100% 100%,
+    linear-gradient(to top,    rgba(127,213,155,0.5) 2px, transparent 2px) 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  z-index: 1;
+}
+.cta-panel:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* --------------------------------------------------------------------------
    ACCESSIBILITY: Reduced Motion Fallbacks
    -------------------------------------------------------------------------- */
@@ -1295,4 +1619,15 @@ footer{padding:70px 0 34px;}
     transition:opacity 0.15s linear !important;
     transform:none !important;
   }
+  /* Disable new animations */
+  .cur, .cur-ring, .cur-dot, .cur-cross { display: none !important; }
+  body { cursor: auto !important; }
+  a, button { cursor: pointer !important; }
+  .console-readout::after { animation: none !important; }
+  .cp-feed-item .dot,
+  .cp-feed-item.warn .dot { animation: none !important; }
+  .lab-prog::after { display: none !important; }
+  .product-card::after,
+  .ind-card::after,
+  .cyber-feat::after { display: none !important; }
 }

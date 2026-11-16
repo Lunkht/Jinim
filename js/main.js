@@ -883,4 +883,173 @@
   }
 
   applyLang();
+
+  /* =====================================================================
+     CUSTOM CURSOR
+     ===================================================================== */
+  if (!isReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    // Build DOM
+    var curEl   = document.createElement('div'); curEl.className = 'cur';
+    var curRing = document.createElement('div'); curRing.className = 'cur-ring';
+    var curDot  = document.createElement('div'); curDot.className = 'cur-dot';
+    var curCross= document.createElement('div'); curCross.className = 'cur-cross';
+    curEl.appendChild(curRing);
+    var curEl2  = document.createElement('div'); curEl2.className = 'cur';
+    curEl2.appendChild(curDot);
+    var curEl3  = document.createElement('div'); curEl3.className = 'cur';
+    curEl3.appendChild(curCross);
+    document.body.appendChild(curEl);
+    document.body.appendChild(curEl2);
+    document.body.appendChild(curEl3);
+
+    var mx = -100, my = -100; // start offscreen
+    var rx = -100, ry = -100; // ring (lagged)
+
+    function moveCursor(e) { mx = e.clientX; my = e.clientY; }
+    document.addEventListener('mousemove', moveCursor, { passive: true });
+
+    var curRaf;
+    function animCursor() {
+      // Dot & cross: instant
+      curEl2.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      curEl3.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      // Ring: lerp for smooth follow
+      rx += (mx - rx) * 0.14;
+      ry += (my - ry) * 0.14;
+      curEl.style.transform = 'translate(' + rx + 'px,' + ry + 'px)';
+      curRaf = requestAnimationFrame(animCursor);
+    }
+    curRaf = requestAnimationFrame(animCursor);
+
+    // Hover state on interactive elements
+    var hoverTargets = 'a, button, [role="button"], .product-card, .ind-card, .cyber-feat, .lab-feats li, .cta-panel, .layer, input, select';
+    document.addEventListener('mouseover', function(e) {
+      if (e.target.closest(hoverTargets)) document.body.classList.add('cur-hover');
+    }, { passive: true });
+    document.addEventListener('mouseout', function(e) {
+      if (e.target.closest(hoverTargets)) document.body.classList.remove('cur-hover');
+    }, { passive: true });
+
+    // Click feedback
+    document.addEventListener('mousedown', function() {
+      document.body.classList.add('cur-click');
+    }, { passive: true });
+    document.addEventListener('mouseup', function() {
+      document.body.classList.remove('cur-click');
+    }, { passive: true });
+
+    // Hide when leaving window
+    document.addEventListener('mouseleave', function() {
+      curEl.style.opacity = '0';
+      curEl2.style.opacity = '0';
+      curEl3.style.opacity = '0';
+    }, { passive: true });
+    document.addEventListener('mouseenter', function() {
+      curEl.style.opacity = '';
+      curEl2.style.opacity = '';
+      curEl3.style.opacity = '';
+    }, { passive: true });
+  }
+
+  /* =====================================================================
+     RIPPLE EFFECT ON BUTTONS & LINKS.BTN
+     ===================================================================== */
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.btn');
+    if (!btn) return;
+    var rect = btn.getBoundingClientRect();
+    var size = Math.max(rect.width, rect.height) * 1.6;
+    var x = e.clientX - rect.left - size / 2;
+    var y = e.clientY - rect.top  - size / 2;
+    var wave = document.createElement('span');
+    wave.className = 'ripple-wave';
+    wave.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + x + 'px;top:' + y + 'px;';
+    btn.appendChild(wave);
+    wave.addEventListener('animationend', function() { wave.remove(); });
+  }, { passive: true });
+
+  /* =====================================================================
+     3D TILT ON PRODUCT CARDS
+     ===================================================================== */
+  if (!isReducedMotion) {
+    var productCards = document.querySelectorAll('.product-card');
+    for (var pc = 0; pc < productCards.length; pc++) {
+      (function(card) {
+        card.addEventListener('mousemove', function(e) {
+          if (window.innerWidth <= 920) return;
+          var rect = card.getBoundingClientRect();
+          var cx   = rect.left + rect.width  / 2;
+          var cy   = rect.top  + rect.height / 2;
+          var dx   = (e.clientX - cx) / (rect.width  / 2);
+          var dy   = (e.clientY - cy) / (rect.height / 2);
+          var rotX = (-dy * 6).toFixed(2);
+          var rotY = ( dx * 6).toFixed(2);
+          card.style.transform = 'perspective(900px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateY(-6px) scale(1.015)';
+        });
+        card.addEventListener('mouseleave', function() {
+          card.style.transform = '';
+        });
+      })(productCards[pc]);
+    }
+
+    /* 3D TILT ON IND CARDS */
+    var indCards = document.querySelectorAll('.ind-card');
+    for (var ic = 0; ic < indCards.length; ic++) {
+      (function(card) {
+        card.addEventListener('mousemove', function(e) {
+          if (window.innerWidth <= 920) return;
+          var rect = card.getBoundingClientRect();
+          var dx   = (e.clientX - (rect.left + rect.width  / 2)) / (rect.width  / 2);
+          var dy   = (e.clientY - (rect.top  + rect.height / 2)) / (rect.height / 2);
+          card.style.transform = 'perspective(700px) rotateX(' + (-dy * 4).toFixed(2) + 'deg) rotateY(' + (dx * 4).toFixed(2) + 'deg) translateY(-5px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', function() {
+          card.style.transform = '';
+        });
+      })(indCards[ic]);
+    }
+  }
+
+  /* =====================================================================
+     MAGNETIC BUTTONS (hero CTA + nav demo btn)
+     ===================================================================== */
+  if (!isReducedMotion) {
+    var magnetBtns = document.querySelectorAll('.hero-actions .btn, .nav-actions .btn-ghost');
+    for (var mb = 0; mb < magnetBtns.length; mb++) {
+      (function(btn) {
+        btn.addEventListener('mousemove', function(e) {
+          if (window.innerWidth <= 920) return;
+          var rect = btn.getBoundingClientRect();
+          var dx   = (e.clientX - (rect.left + rect.width  / 2)) * 0.22;
+          var dy   = (e.clientY - (rect.top  + rect.height / 2)) * 0.22;
+          btn.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) scale(1.04)';
+        });
+        btn.addEventListener('mouseleave', function() {
+          btn.style.transform = '';
+        });
+      })(magnetBtns[mb]);
+    }
+  }
+
+  /* =====================================================================
+     ACTIVE NAV LINK on scroll (highlight current section)
+     ===================================================================== */
+  var navSections = ['top','mission','products','architecture','industries','ecosystem','cyber','lab','cta'];
+  var navLinks2 = document.querySelectorAll('.nav-list a[href^="#"]');
+  function updateActiveNav() {
+    var scrollY = window.pageYOffset;
+    var current = navSections[0];
+    for (var ns = 0; ns < navSections.length; ns++) {
+      var sec = document.getElementById(navSections[ns]);
+      if (sec && sec.getBoundingClientRect().top <= 100) current = navSections[ns];
+    }
+    for (var nl = 0; nl < navLinks2.length; nl++) {
+      var href2 = navLinks2[nl].getAttribute('href').replace('#','');
+      if (href2 === current) navLinks2[nl].classList.add('active');
+      else navLinks2[nl].classList.remove('active');
+    }
+  }
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+
 })();
