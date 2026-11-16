@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f1115"/><stop offset="0.6" stop-color="#080a0d"/><stop offset="1" stop-color="#040405"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#2a3f35" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#2a3f35" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#glow)"/>
+  <g stroke="#1b2420" stroke-width="1">
+    <line x1="0" y1="280" x2="1200" y2="280"/><line x1="0" y1="580" x2="1200" y2="580"/>
+    <line x1="420" y1="0" x2="420" y2="800"/><line x1="780" y1="0" x2="780" y2="800"/>
+  </g>
+  <!-- Tactical Backpack Blueprint Silhouette -->
+  <g fill="none" stroke="#3d4f45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="470" y="210" width="260" height="380" rx="28" fill="#111614" stroke="#4e6558" stroke-width="2.5"/>
+    <path d="M540 210c0-26 120-26 120 0" stroke="#4e6558" stroke-width="3"/>
+    <rect x="495" y="240" width="210" height="90" rx="10" fill="#161e1b" stroke="#3d4f45"/>
+    <rect x="525" y="260" width="150" height="50" rx="4" fill="#0c110f" stroke="#7FD59B" stroke-width="1.5"/>
+    <path d="M540 285h30l6-10 8 20 6-10h40" stroke="#7FD59B" stroke-width="1.5"/>
+    <rect x="495" y="350" width="210" height="180" rx="12" fill="#141a17" stroke="#3d4f45"/>
+    <line x1="515" y1="380" x2="685" y2="380" stroke="#2d3d34" stroke-width="3"/>
+    <line x1="515" y1="415" x2="685" y2="415" stroke="#2d3d34" stroke-width="3"/>
+    <line x1="515" y1="450" x2="685" y2="450" stroke="#2d3d34" stroke-width="3"/>
+    <line x1="515" y1="485" x2="685" y2="485" stroke="#2d3d34" stroke-width="3"/>
+    <rect x="440" y="320" width="26" height="140" rx="6" fill="#131815" stroke="#3d4f45"/>
+    <rect x="734" y="320" width="26" height="140" rx="6" fill="#131815" stroke="#3d4f45"/>
+    <circle cx="453" cy="350" r="5" fill="#7FD59B"/>
+    <circle cx="747" cy="350" r="5" fill="#4d94ff"/>
+    <line x1="466" y1="370" x2="734" y2="370" stroke="#4e6558" stroke-dasharray="8 6"/>
+    <rect x="585" y="362" width="30" height="16" rx="3" fill="#2d3d34" stroke="#7FD59B" stroke-width="1"/>
+  </g>
+  <rect width="1200" height="800" fill="url(#vig)"/>
+</svg>

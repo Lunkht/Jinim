@@ -95,6 +95,16 @@
       'products.p4.s2': 'poids < 1 kg',
       'products.p4.s3': 'usage unique',
       'products.p4.s4': 'certifié ISO 13485',
+      'products.p5.tag': 'Sac à dos haute technologie',
+      'products.p5.name': 'Sac J-HighTech',
+      'products.p5.desc': 'Sac multifonctionnel équipé pour les situations d\'urgence et de survie en milieu difficile.',
+      'products.p5.s1': 'Multiple fonctions',
+      'products.p5.s2': 'Compatible masque gaz et oxygène',
+      'products.p5.s3': 'Compartiment étanche combinaison légère',
+      'products.p5.s4': 'Réservoir eau 2L avec raccord boisson',
+      'products.p5.s5': 'Stockage oxygène 3kg avec masque',
+      'products.p5.s6': '2 compartiments effets personnels',
+      'products.p5.s7': 'Écran 7" intégré survie',
       'industries.label': 'Industries',
       'industries.title': 'Une chaîne d\'équipements pour chaque terrain',
       'industries.desc': 'Les armées, les forces de sécurité et les secours affrontent les mêmes contraintes : agir vite, voir large, protéger et soigner. Jimin équipe chacune de ces missions.',
@@ -325,6 +335,16 @@
       'products.p4.s2': 'weight < 1 kg',
       'products.p4.s3': 'single use',
       'products.p4.s4': 'ISO 13485 certified',
+      'products.p5.tag': 'High-tech backpack',
+      'products.p5.name': 'J-HighTech Pack',
+      'products.p5.desc': 'Multi-functional backpack equipped for emergency and survival in harsh conditions.',
+      'products.p5.s1': 'Multiple functions',
+      'products.p5.s2': 'Gas mask and oxygen compatible',
+      'products.p5.s3': 'Lightweight waterproof compartment',
+      'products.p5.s4': '2L water reservoir with drink connector',
+      'products.p5.s5': '3kg oxygen storage with mask',
+      'products.p5.s6': '2 personal effects compartments',
+      'products.p5.s7': '7" integrated survival screen',
       'industries.label': 'Industries',
       'industries.title': 'An equipment line for every terrain',
       'industries.desc': 'Armed forces, security services and first responders face the same constraints: act fast, see wide, protect and heal. Jimin equips each of these missions.',
@@ -839,7 +859,7 @@
       }
     }
   }
-  assignStagger('.product-grid', 4);
+  assignStagger('.product-grid', 5);
   assignStagger('.ind-grid', 3);
   assignStagger('.ind-stats', 4);
   assignStagger('.cyber-feats', 4);
