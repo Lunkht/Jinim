@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body>
 
@@ -207,8 +207,25 @@
         <p data-i18n="products.desc">Quatre familles complètes et complémentaires, conçues pour la détection, la protection et le soin — déployables ensemble sur un même théâtre.</p>
       </div>
     </div>
+
+    <!-- Filtres interactifs par catégorie -->
+    <div class="product-filters" role="tablist" aria-label="Filtres de produits">
+      <button class="p-filter-btn active" data-filter="all" type="button" role="tab" aria-selected="true">
+        <span data-i18n="products.filter.all">Tous</span> <span class="p-filter-count">5</span>
+      </button>
+      <button class="p-filter-btn" data-filter="drone" type="button" role="tab" aria-selected="false">
+        <span data-i18n="products.filter.drones">Drones ISR</span> <span class="p-filter-count">1</span>
+      </button>
+      <button class="p-filter-btn" data-filter="camera" type="button" role="tab" aria-selected="false">
+        <span data-i18n="products.filter.cameras">Caméras & Capteurs</span> <span class="p-filter-count">2</span>
+      </button>
+      <button class="p-filter-btn" data-filter="medical" type="button" role="tab" aria-selected="false">
+        <span data-i18n="products.filter.medical">Soins & Survie</span> <span class="p-filter-count">2</span>
+      </button>
+    </div>
+
     <div class="product-grid">
-      <article class="product-card" data-idx="01">
+      <article class="product-card" data-idx="01" data-category="drone" data-pid="p1">
         <div class="p-media" aria-hidden="true">
           <img src="assets/media/p1-ph.svg" alt="" aria-hidden="true">
           <img class="media-real" src="assets/media/p1.jpg" alt="" onerror="this.style.display='none'">
@@ -226,9 +243,9 @@
           <li data-i18n="products.p1.s3">vision thermique</li>
           <li data-i18n="products.p1.s4">anti-brouillage</li>
         </ul>
-        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button class="p-link p-detail-trigger" type="button" data-product-id="p1"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </article>
-      <article class="product-card" data-idx="02">
+      <article class="product-card" data-idx="02" data-category="camera" data-pid="p2">
         <div class="p-media" aria-hidden="true">
           <img src="assets/media/p2-ph.svg" alt="" aria-hidden="true">
           <img class="media-real" src="assets/media/p2.jpg" alt="" onerror="this.style.display='none'">
@@ -246,9 +263,9 @@
           <li data-i18n="products.p2.s3">indice IP67</li>
           <li data-i18n="products.p2.s4">analyse embarquée</li>
         </ul>
-        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button class="p-link p-detail-trigger" type="button" data-product-id="p2"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </article>
-      <article class="product-card" data-idx="03">
+      <article class="product-card" data-idx="03" data-category="camera" data-pid="p3">
         <div class="p-media" aria-hidden="true">
           <img src="assets/media/p3-ph.svg" alt="" aria-hidden="true">
           <img class="media-real" src="assets/media/p3.jpg" alt="" onerror="this.style.display='none'">
@@ -266,9 +283,9 @@
           <li data-i18n="products.p3.s3">déclenchement partagé</li>
           <li data-i18n="products.p3.s4">anti-altération</li>
         </ul>
-        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button class="p-link p-detail-trigger" type="button" data-product-id="p3"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </article>
-      <article class="product-card" data-idx="04">
+      <article class="product-card" data-idx="04" data-category="medical" data-pid="p4">
         <div class="p-media" aria-hidden="true">
           <img src="assets/media/p4-ph.svg" alt="" aria-hidden="true">
           <img class="media-real" src="assets/media/p4.jpg" alt="" onerror="this.style.display='none'">
@@ -286,9 +303,9 @@
           <li data-i18n="products.p4.s3">usage unique</li>
           <li data-i18n="products.p4.s4">certifié ISO 13485</li>
         </ul>
-        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button class="p-link p-detail-trigger" type="button" data-product-id="p4"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </article>
-      <article class="product-card" data-idx="05">
+      <article class="product-card" data-idx="05" data-category="medical" data-pid="p5">
         <div class="p-media" aria-hidden="true">
           <img src="assets/media/p5-ph.svg" alt="" aria-hidden="true">
           <img class="media-real" src="assets/media/p5.jpg" alt="" onerror="this.style.display='none'">
@@ -309,7 +326,7 @@
           <li data-i18n="products.p5.s6">2 compartiments effets personnels</li>
           <li data-i18n="products.p5.s7">Écran 7" intégré survie</li>
         </ul>
-        <a class="p-link" href="#demo" onclick="openModal()"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button class="p-link p-detail-trigger" type="button" data-product-id="p5"><span data-i18n="products.more">En savoir plus</span><svg class="icon-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.33 7H11.08M11.08 7L7 2.92M11.08 7L7 11.08" stroke="currentColor" stroke-width="1.17" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </article>
     </div>
   </div>
@@ -322,22 +339,66 @@
       <h2>Quatre couches, une seule plateforme</h2>
       <p>Chaque couche de Jinim reste remplaçable indépendamment des autres — changez de modèle de langage ou d'hébergeur sans toucher à vos agents ni à vos intégrations.</p>
     </div>
-    <div>
-      <div class="layer">
-        <span class="ltag">interface</span>
-        <div><strong>Console Jinim</strong><span class="desc">Pilotage, supervision et validation humaine des décisions critiques.</span></div>
+    <div class="arch-layers">
+      <div class="layer layer-accordion" tabindex="0" role="button" aria-expanded="false" data-layer="1">
+        <div class="layer-main">
+          <span class="ltag">interface</span>
+          <div><strong>Console Jinim</strong><span class="desc">Pilotage, supervision et validation humaine des décisions critiques.</span></div>
+          <span class="layer-toggle">+</span>
+        </div>
+        <div class="layer-drawer">
+          <div class="layer-specs">
+            <span>Latence: &lt; 10ms</span>
+            <span>Protocole: WebSockets E2EE</span>
+            <span>Auth: FIDO2 / Biométrie</span>
+            <span>Statut: <em class="stat-ok">En ligne</em></span>
+          </div>
+        </div>
       </div>
-      <div class="layer core">
-        <span class="ltag">orchestrateur</span>
-        <div><strong>Jinim Core</strong><span class="desc">Planifie, délègue et arbitre entre les agents selon vos règles métier.</span></div>
+      <div class="layer core layer-accordion" tabindex="0" role="button" aria-expanded="false" data-layer="2">
+        <div class="layer-main">
+          <span class="ltag">orchestrateur</span>
+          <div><strong>Jinim Core</strong><span class="desc">Planifie, délègue et arbitre entre les agents selon vos règles métier.</span></div>
+          <span class="layer-toggle">+</span>
+        </div>
+        <div class="layer-drawer">
+          <div class="layer-specs">
+            <span>Débit: 10k ops/sec</span>
+            <span>Arbitrage: Deterministic AI</span>
+            <span>Tolérance panne: Active-Active</span>
+            <span>Statut: <em class="stat-ok">En ligne</em></span>
+          </div>
+        </div>
       </div>
-      <div class="layer">
-        <span class="ltag">agents</span>
-        <div><strong>Agents spécialisés</strong><span class="desc">Unités autonomes dédiées à un domaine : support, data, finance, opérations.</span></div>
+      <div class="layer layer-accordion" tabindex="0" role="button" aria-expanded="false" data-layer="3">
+        <div class="layer-main">
+          <span class="ltag">agents</span>
+          <div><strong>Agents spécialisés</strong><span class="desc">Unités autonomes dédiées à un domaine : support, data, finance, opérations.</span></div>
+          <span class="layer-toggle">+</span>
+        </div>
+        <div class="layer-drawer">
+          <div class="layer-specs">
+            <span>Agents actifs: 18</span>
+            <span>Isolation: Sandboxed WASM</span>
+            <span>Audit trail: SHA-256 signé</span>
+            <span>Statut: <em class="stat-ok">En ligne</em></span>
+          </div>
+        </div>
       </div>
-      <div class="layer">
-        <span class="ltag">infrastructure</span>
-        <div><strong>Connecteurs & modèles</strong><span class="desc">Vos données, vos modèles, votre matériel — interchangeables à tout moment.</span></div>
+      <div class="layer layer-accordion" tabindex="0" role="button" aria-expanded="false" data-layer="4">
+        <div class="layer-main">
+          <span class="ltag">infrastructure</span>
+          <div><strong>Connecteurs & modèles</strong><span class="desc">Vos données, vos modèles, votre matériel — interchangeables à tout moment.</span></div>
+          <span class="layer-toggle">+</span>
+        </div>
+        <div class="layer-drawer">
+          <div class="layer-specs">
+            <span>Liaison: LoRaWAN / Satcom / 5G Mil</span>
+            <span>Normes: STANAG 4586</span>
+            <span>Zero-Vendor-Lockin</span>
+            <span>Statut: <em class="stat-ok">En ligne</em></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -478,26 +539,64 @@
       </div>
     </div>
     <div class="cyber-grid">
-      <div class="cyber-phone" aria-hidden="true">
+      <div class="cyber-phone" id="cyberPhone" role="region" aria-label="Simulateur mobile JCyber">
         <div class="cyber-phone-screen">
           <div class="cp-status"><span>09:41</span><span>▲▲ 100%</span></div>
           <div class="cp-app">
             <div class="cp-top"><span class="cp-logo">JCyber</span><span class="cp-live">LIVE</span></div>
             <div class="cp-score">
-              <div class="cp-ring"><span>95</span></div>
+              <div class="cp-ring" id="cpRing"><span id="cpScoreVal">95</span></div>
               <div class="cp-score-txt">
                 <strong data-i18n="cyber.score">indice de sécurité</strong>
-                <span data-i18n="cyber.secure">système verrouillé</span>
+                <span id="cpSecureTxt" data-i18n="cyber.secure">système verrouillé</span>
               </div>
             </div>
-            <div class="cp-feed">
-              <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed1">liaison chiffrée active</span></div>
-              <div class="cp-feed-item warn"><span class="dot"></span><span data-i18n="cyber.feed2">menace bloquée — wifi piégé</span></div>
-              <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed3">VPN tactique : zone nord</span></div>
-              <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed4">accès biométrique validé</span></div>
+            <!-- Écran 1 : Tableau de bord -->
+            <div class="cp-screen-view active" id="cpScreenDash">
+              <div class="cp-feed" id="cpFeed">
+                <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed1">liaison chiffrée active</span></div>
+                <div class="cp-feed-item warn"><span class="dot"></span><span data-i18n="cyber.feed2">menace bloquée — wifi piégé</span></div>
+                <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed3">VPN tactique : zone nord</span></div>
+                <div class="cp-feed-item"><span class="dot"></span><span data-i18n="cyber.feed4">accès biométrique validé</span></div>
+              </div>
+              <button class="cp-scan-btn" id="cpScanBtn" type="button">
+                <span class="cp-scan-icon">⚡</span> <span id="cpScanTxt" data-i18n="cyber.scan">Scanner la zone</span>
+              </button>
             </div>
-            <div class="cp-chips"><span>VPN</span><span>SCRAM</span><span>E2EE</span></div>
-            <div class="cp-nav"><i></i><i></i><i></i><i></i></div>
+            <!-- Écran 2 : Radar local -->
+            <div class="cp-screen-view" id="cpScreenRadar" style="display:none">
+              <div class="cp-mini-radar">
+                <div class="cmr-sweep"></div>
+                <div class="cmr-blip b-ok" style="top:25%; left:35%;"></div>
+                <div class="cmr-blip b-alert" style="top:60%; left:75%;"></div>
+                <div class="cmr-blip b-ok" style="top:70%; left:30%;"></div>
+                <span class="cmr-center-dot"></span>
+              </div>
+              <div class="cmr-legend">
+                <span><i class="dot-g"></i> Équipiers (2)</span>
+                <span><i class="dot-r"></i> Balise isolée (1)</span>
+              </div>
+            </div>
+            <!-- Écran 3 : Chiffrement -->
+            <div class="cp-screen-view" id="cpScreenCrypt" style="display:none">
+              <div class="cp-crypt-box">
+                <span class="cc-label">TUNNEL E2EE TACTIQUE</span>
+                <code>SHA-384 / ECDH-25519</code>
+                <div class="cc-stat">Flux: <strong>14 892 paquets</strong></div>
+                <div class="cc-stat">Intégrité: <strong>100% SANS PERTE</strong></div>
+              </div>
+            </div>
+
+            <div class="cp-chips" role="group" aria-label="Options JCyber">
+              <button class="cp-chip on" data-chip="vpn" type="button" aria-pressed="true">VPN</button>
+              <button class="cp-chip" data-chip="scram" type="button" aria-pressed="false">SCRAM</button>
+              <button class="cp-chip on" data-chip="e2ee" type="button" aria-pressed="true">E2EE</button>
+            </div>
+            <div class="cp-nav" id="cpNav" role="tablist">
+              <button class="cp-nav-dot active" data-tab="dash" type="button" aria-label="Tableau de bord"></button>
+              <button class="cp-nav-dot" data-tab="radar" type="button" aria-label="Radar"></button>
+              <button class="cp-nav-dot" data-tab="crypt" type="button" aria-label="Cryptographie"></button>
+            </div>
           </div>
         </div>
       </div>
@@ -561,28 +660,38 @@
       </div>
     </div>
     <div class="lab-grid">
-      <div class="lab-term" aria-hidden="true">
-        <div class="lab-term-bar"><span class="lt-dots"></span><span data-i18n="lab.term">jimin lab — parcours en cours</span></div>
+      <div class="lab-term" id="labTerm" role="region" aria-label="Simulateur Jinim Lab">
+        <div class="lab-term-bar">
+          <span class="lt-dots"></span>
+          <span data-i18n="lab.term">jimin lab — simulateur interactif</span>
+        </div>
         <div class="lab-term-body">
-          <div class="lab-row">
-            <div><strong data-i18n="lab.term1">Cyberdéfense — niveau 1</strong><span>80 %</span></div>
+          <div class="lab-row active" tabindex="0" role="button" data-course="1">
+            <div><strong data-i18n="lab.term1">Cyberdéfense — niveau 1</strong><span class="lab-val">80 %</span></div>
             <div class="lab-prog" style="--p:80%"></div>
           </div>
-          <div class="lab-row">
-            <div><strong data-i18n="lab.term2">Pilotage drone ISR</strong><span>45 %</span></div>
+          <div class="lab-row" tabindex="0" role="button" data-course="2">
+            <div><strong data-i18n="lab.term2">Pilotage drone ISR</strong><span class="lab-val">45 %</span></div>
             <div class="lab-prog" style="--p:45%"></div>
           </div>
-          <div class="lab-row">
-            <div><strong data-i18n="lab.term3">Électronique & drones</strong><span>62 %</span></div>
+          <div class="lab-row" tabindex="0" role="button" data-course="3">
+            <div><strong data-i18n="lab.term3">Électronique & drones</strong><span class="lab-val">62 %</span></div>
             <div class="lab-prog" style="--p:62%"></div>
           </div>
-          <div class="lab-row">
-            <div><strong data-i18n="lab.term4">Secourisme tactique</strong><span>12 %</span></div>
+          <div class="lab-row" tabindex="0" role="button" data-course="4">
+            <div><strong data-i18n="lab.term4">Secourisme tactique</strong><span class="lab-val">12 %</span></div>
             <div class="lab-prog" style="--p:12%"></div>
           </div>
+          <!-- Terminal live readout -->
+          <div class="lab-sim-console" id="labConsole">
+            <div class="lsc-line"><span class="lsc-prompt">></span> <span class="lsc-txt" id="lscTxt">Module sélectionné : Cyberdéfense — niveau 1</span></div>
+            <div class="lsc-line"><span class="lsc-prompt">></span> <span class="lsc-stat" id="lscStat">[EN LIGNE] 12 exercices validés · Prêt pour certification</span></div>
+          </div>
           <div class="lab-term-foot">
-            <span class="lab-flag">100 %</span>
-            <span data-i18n="lab.termfree">gratuit · certificat à la clé</span>
+            <button class="lab-run-btn" id="labRunBtn" type="button">
+              <span id="labRunTxt" data-i18n="lab.run">▶ Lancer l'exercice</span>
+            </button>
+            <span class="lab-flag" data-i18n="lab.termfree">gratuit · certificat à la clé</span>
           </div>
         </div>
       </div>
@@ -693,6 +802,47 @@
   </div>
 </footer>
 
+<!-- Modale interactive de détails d'équipement (Quick View) -->
+<div class="modal-overlay" id="productModalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal product-modal">
+    <div class="modal-inner">
+      <button class="modal-close" id="productModalClose" aria-label="Fermer">×</button>
+      <div class="pm-head">
+        <span class="pm-tag" id="pmTag">Catégorie</span>
+        <h3 id="pmTitle">Nom du produit</h3>
+        <p class="sub" id="pmDesc">Description de l'équipement</p>
+      </div>
+      <div class="pm-media-box">
+        <div class="pm-media-img" id="pmMediaWrap">
+          <img id="pmImage" src="" alt="">
+          <div class="pm-hud-crosshairs">
+            <span class="pm-hud-badge">HUD // SPÉCIFICATIONS OPÉRATIONNELLES</span>
+            <span class="pm-hud-cert" id="pmHudCert">MIL-SPEC 810H</span>
+          </div>
+        </div>
+      </div>
+      <div class="pm-tabs" role="tablist">
+        <button class="pm-tab active" data-ptab="specs" type="button">Caractéristiques</button>
+        <button class="pm-tab" data-ptab="deployment" type="button">Déploiement</button>
+        <button class="pm-tab" data-ptab="security" type="button">Sécurité & Chiffrement</button>
+      </div>
+      <div class="pm-tab-pane active" id="pmPaneSpecs">
+        <ul class="pm-specs-list" id="pmSpecsList"></ul>
+      </div>
+      <div class="pm-tab-pane" id="pmPaneDeployment" style="display:none">
+        <p id="pmDeployTxt">Déployable en moins de 90 secondes sur le terrain. Autonomie et connectivité autonome sans dépendance infrastructurelle.</p>
+      </div>
+      <div class="pm-tab-pane" id="pmPaneSecurity" style="display:none">
+        <p id="pmSecurityTxt">Canal crypté AES-256 GCM, stockage anti-altération et conformité défense OTAN / ISO.</p>
+      </div>
+      <div class="pm-actions">
+        <button class="btn btn-primary" id="pmCtaDemo" type="button">Demander une démo pour ce matériel</button>
+        <button class="btn btn-ghost" id="pmBtnCancel" type="button">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-inner">
@@ -728,7 +878,7 @@
   <span>TOP</span>
 </button>
 
-<script src="js/main.js?v=7"></script>
+<script src="js/main.js?v=9"></script>
 
 </body>
 </html>

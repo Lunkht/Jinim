@@ -66,6 +66,10 @@
       'products.label': 'Produits',
       'products.title': 'La chaîne d\'équipements de la première ligne',
       'products.desc': 'Quatre familles complètes et complémentaires, conçues pour la détection, la protection et le soin — déployables ensemble sur un même théâtre.',
+      'products.filter.all': 'Tous',
+      'products.filter.drones': 'Drones ISR',
+      'products.filter.cameras': 'Caméras & Capteurs',
+      'products.filter.medical': 'Soins & Survie',
       'products.more': 'En savoir plus',
       'products.p1.tag': 'Reconnaissance & surveillance autonome',
       'products.p1.name': 'Drone J-ISR',
@@ -153,6 +157,7 @@
       'cyber.avail': 'Android · iOS',
       'cyber.score': 'indice de sécurité',
       'cyber.secure': 'système verrouillé',
+      'cyber.scan': 'Scanner la zone',
       'cyber.feed1': 'liaison chiffrée active',
       'cyber.feed2': 'menace bloquée — wifi piégé',
       'cyber.feed3': 'VPN tactique : zone nord',
@@ -178,6 +183,7 @@
       'lab.desc': 'Jinim Lab embarque des centaines de tutoriels gratuits, des parcours métiers guidés et des certificats — pour apprendre aux jeunes les savoir-faire de la défense, de la tech et du secours.',
       'lab.cta': 'Commencer gratuitement',
       'lab.term': 'jimin lab — parcours en cours',
+      'lab.run': '▶ Lancer l\'exercice',
       'lab.term1': 'Cyberdéfense — niveau 1',
       'lab.term2': 'Pilotage drone ISR',
       'lab.term3': 'Électronique & drones',
@@ -306,6 +312,10 @@
       'products.label': 'Products',
       'products.title': 'The complete frontline equipment line',
       'products.desc': 'Four complete, complementary families built for detection, protection and care — deployable together on a single theater.',
+      'products.filter.all': 'All',
+      'products.filter.drones': 'ISR Drones',
+      'products.filter.cameras': 'Cameras & Sensors',
+      'products.filter.medical': 'Medical & Survival',
       'products.more': 'Learn more',
       'products.p1.tag': 'Autonomous reconnaissance & surveillance',
       'products.p1.name': 'J-ISR Drone',
@@ -393,6 +403,7 @@
       'cyber.avail': 'Android · iOS',
       'cyber.score': 'security score',
       'cyber.secure': 'system locked',
+      'cyber.scan': 'Scan local area',
       'cyber.feed1': 'encrypted link active',
       'cyber.feed2': 'threat blocked — rogue wifi',
       'cyber.feed3': 'tactical VPN: north zone',
@@ -418,6 +429,7 @@
       'lab.desc': 'Jinim Lab packs hundreds of free tutorials, guided career tracks and certificates — teaching young people the skills of defense, tech and emergency.',
       'lab.cta': 'Start for free',
       'lab.term': 'jimin lab — courses in progress',
+      'lab.run': '▶ Run exercise',
       'lab.term1': 'Cyber defense — level 1',
       'lab.term2': 'ISR drone piloting',
       'lab.term3': 'Electronics & drones',
@@ -1051,5 +1063,471 @@
   }
   window.addEventListener('scroll', updateActiveNav, { passive: true });
   updateActiveNav();
+
+  /* =====================================================================
+     INTERACTIVE PRODUCT FILTERS
+     ===================================================================== */
+  var filterBtns = document.querySelectorAll('.p-filter-btn');
+  var prodCards = document.querySelectorAll('.product-card');
+
+  for (var f = 0; f < filterBtns.length; f++) {
+    filterBtns[f].addEventListener('click', function() {
+      var filter = this.getAttribute('data-filter');
+      for (var b = 0; b < filterBtns.length; b++) {
+        filterBtns[b].classList.remove('active');
+        filterBtns[b].setAttribute('aria-selected', 'false');
+      }
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+
+      for (var c = 0; c < prodCards.length; c++) {
+        var card = prodCards[c];
+        var cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.classList.remove('is-hidden');
+          card.classList.remove('filter-anim');
+          void card.offsetWidth; // reflow
+          card.classList.add('filter-anim');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      }
+    });
+  }
+
+  /* =====================================================================
+     PRODUCT QUICK-VIEW MODAL
+     ===================================================================== */
+  var PRODUCT_DATA = {
+    fr: {
+      p1: {
+        tag: 'Reconnaissance & surveillance autonome',
+        name: 'Drone J-ISR',
+        desc: 'Détection, poursuite et éclairage de zone en continu, de jour comme de nuit, avec renvoi de la vidéo en temps réel au poste de commandement.',
+        img: 'assets/media/p1-ph.svg',
+        cert: 'MIL-STD-810H // IP67',
+        specs: [
+          'Autonomie en vol : 45 min continue',
+          'Portée opérationnelle : 12 km liaison LOS',
+          'Capteur optronique : Vision thermique 640x512',
+          'Contre-mesures : Anti-brouillage GNSS',
+          'Plafond opérationnel : 4 500 m d\'altitude',
+          'Liaison chiffrée : AES-256 OFDM'
+        ],
+        deploy: 'Déploiement en moins de 90 secondes sans outil. Décollage et atterrissage verticaux autonomes en milieu exigu.',
+        security: 'Cryptage matériel de bout en bout des flux vidéo. Absence totale de transmission de données non autorisées.'
+      },
+      p2: {
+        tag: 'Surveillance fixe, vision de nuit',
+        name: 'Caméra J-SCAM',
+        desc: 'Caméras réseau robustes pour la protection des sites sensibles, des frontières et des zones urbaines, avec analyse embarquée.',
+        img: 'assets/media/p2-ph.svg',
+        cert: 'IK10 // IP67 // NEMA 4X',
+        specs: [
+          'Capteur optique : 4K Ultra-HDR 60 fps',
+          'Éclairage infrarouge : Portée 150 m nocturne',
+          'Traitement IA embarqué : Classification véhicules et piétons',
+          'Boîtier durci : Températures extrêmes -40°C à +65°C',
+          'Alimentation : PoE+ et batterie de secours tampon 48h',
+          'Réseau : Fibre optique et repli 5G tactique chiffré'
+        ],
+        deploy: 'Installation sur mât, façade ou remorque autonome tactique. Raccordement automatique à la Console Jinim.',
+        security: 'Module TPM 2.0 embarqué. Protection physique contre le sabotage et détection d\'occultation automatique.'
+      },
+      p3: {
+        tag: 'Preuve intégrale d\'intervention',
+        name: 'Bodycam J-BWC',
+        desc: 'Caméras portées par les forces, les policiers et les secouristes pour documenter chaque intervention avec chiffrement de bout en bout.',
+        img: 'assets/media/p3-ph.svg',
+        cert: 'AES-256 // FIPS 140-3',
+        specs: [
+          'Autonomie continue : 12 heures d\'enregistrement',
+          'Champ de vision : 140° ultra grand-angle',
+          'Déclenchement groupé : Par détection d\'impact',
+          'Scellement cryptographique : Hash par seconde',
+          'Mémoire interne : 128 Go chiffrés matériellement',
+          'Localisation : GNSS multi-fréquence'
+        ],
+        deploy: 'Fixation magnétique ou Molle tactique anti-arrachement. Déchargement automatique et effacement sécurisé au dock.',
+        security: 'Fichiers inaltérables et inviolables. Chaîne de traçabilité juridique certifiée.'
+      },
+      p4: {
+        tag: 'Stabiliser avant l\'arrivée du secours',
+        name: 'J-CARE Soins rapides',
+        desc: 'Kits, garrots, pansements hémostatiques et dispositifs de stabilisation pour prendre en charge un blessé en moins de quelques minutes.',
+        img: 'assets/media/p4-ph.svg',
+        cert: 'CE 0123 // ISO 13485',
+        specs: [
+          'Délai de pose : Garrot tactique en moins de 60 secondes',
+          'Poids du pack complet : Moins de 950 grammes',
+          'Conditionnement : Pochette hermétique étanche',
+          'Pansements hémostatiques : Chitosane haute efficacité',
+          'Compatibilité : Dotation individuelle militaire et secours',
+          'Traçabilité : QR code RFID inventaire péremption'
+        ],
+        deploy: 'Conception ergonomique utilisable d\'une seule main sous stress intense ou obscurité totale.',
+        security: 'Matériaux biocompatibles stériles certifiés normes internationales de médecine de guerre (TCCC).'
+      },
+      p5: {
+        tag: 'Sac à dos haute technologie',
+        name: 'Sac J-HighTech',
+        desc: 'Sac multifonctionnel équipé pour les situations d\'urgence et de survie en milieu hostile, NBC et haute altitude.',
+        img: 'assets/media/p5-ph.svg',
+        cert: 'CBRN / NBC READY',
+        specs: [
+          'Réservoir eau potable : 2L avec raccord rapide boisson filtré',
+          'Stockage oxygène d\'urgence : Bouteille composite 3kg avec masque',
+          'Compartiment étanche : Pour combinaison légère de protection',
+          'Console intégrée : Écran 7" tactile anti-reflet pour télémétrie survie',
+          'Poches modulaires : 2 compartiments effets personnels protégés',
+          'Châssis ergonomique : Répartition dynamique de charge en Cordura 1000D'
+        ],
+        deploy: 'Emport immédiat sur alerte. Raccordement direct aux systèmes de ventilation et monitoring vital.',
+        security: 'Tissu ignifugé et imperméable aux agents toxiques chimiques et biologiques.'
+      }
+    },
+    en: {
+      p1: {
+        tag: 'Autonomous reconnaissance & surveillance',
+        name: 'J-ISR Drone',
+        desc: 'Continuous detection, tracking and area illumination day and night, streaming live video back to the command post.',
+        img: 'assets/media/p1-ph.svg',
+        cert: 'MIL-STD-810H // IP67',
+        specs: [
+          'Flight endurance: 45 min continuous',
+          'Operational range: 12 km LOS datalink',
+          'Optronic sensor: 640x512 thermal imaging',
+          'Countermeasures: Anti-jamming GNSS',
+          'Operational ceiling: 4,500 m altitude',
+          'Encrypted link: AES-256 OFDM'
+        ],
+        deploy: 'Toolless deployment in under 90 seconds. Autonomous VTOL in confined zones.',
+        security: 'Hardware end-to-end encryption for video feeds. Zero unauthorized telemetry transmission.'
+      },
+      p2: {
+        tag: 'Fixed surveillance, night vision',
+        name: 'J-SCAM Camera',
+        desc: 'Rugged network cameras for critical sites, borders and urban areas, with onboard analytics.',
+        img: 'assets/media/p2-ph.svg',
+        cert: 'IK10 // IP67 // NEMA 4X',
+        specs: [
+          'Optical sensor: 4K Ultra-HDR 60 fps',
+          'Infrared illuminator: 150 m night range',
+          'Onboard AI: Vehicle and pedestrian classification',
+          'Hardened casing: -40°C to +65°C extremes',
+          'Power: PoE+ and 48h emergency battery buffer',
+          'Network: Fiber optics & fallback tactical 5G'
+        ],
+        deploy: 'Mounting on mast, wall or tactical mobile trailer. Automatic pairing with Jinim Console.',
+        security: 'Built-in TPM 2.0 module. Anti-tamper physical housing and anti-masking detection.'
+      },
+      p3: {
+        tag: 'Full intervention evidence',
+        name: 'J-BWC Body Camera',
+        desc: 'Body-worn cameras for forces, police and paramedics documenting interventions with end-to-end encryption.',
+        img: 'assets/media/p3-ph.svg',
+        cert: 'AES-256 // FIPS 140-3',
+        specs: [
+          'Continuous recording: 12 hours battery',
+          'Field of view: 140° ultra wide-angle',
+          'Group trigger: Triggered by impact or holster draw',
+          'Cryptographic sealing: Second-by-second hash',
+          'Secure storage: 128 GB hardware encrypted',
+          'Location: Multi-frequency GNSS'
+        ],
+        deploy: 'Magnetic mount or tactical Molle anti-snatch clip. Automatic dock offload & secure wipe.',
+        security: 'Tamper-proof file system. Legally compliant evidentiary chain of custody.'
+      },
+      p4: {
+        tag: 'Stabilize before care arrives',
+        name: 'J-CARE Rapid Care',
+        desc: 'Kits, tourniquets, hemostatic dressings and stabilization devices to treat casualties within minutes.',
+        img: 'assets/media/p4-ph.svg',
+        cert: 'CE 0123 // ISO 13485',
+        specs: [
+          'Application time: Tactical tourniquet < 60 seconds',
+          'Kit weight: Under 950 grams',
+          'Packaging: Hermetic blood- and water-proof pouch',
+          'Hemostatic gauze: High-efficiency chitosan',
+          'Compatibility: Standard military & rescue issue',
+          'Traceability: RFID QR code for expiration tracking'
+        ],
+        deploy: 'One-handed ergonomic design under extreme stress or total darkness.',
+        security: 'Biocompatible sterile materials certified to international TCCC military standards.'
+      },
+      p5: {
+        tag: 'High-tech backpack',
+        name: 'J-HighTech Pack',
+        desc: 'Multi-functional backpack equipped for emergency and survival in hostile environments, CBRN and high altitude.',
+        img: 'assets/media/p5-ph.svg',
+        cert: 'CBRN / NBC READY',
+        specs: [
+          'Drinking water reservoir: 2L with inline filter drink tube',
+          'Emergency oxygen: 3kg composite tank with mask',
+          'Waterproof compartment: For lightweight hazmat suit',
+          'Integrated console: 7" anti-glare touchscreen for vital telemetry',
+          'Modular pockets: 2 protected personal gear compartments',
+          'Ergonomic frame: 1000D Cordura dynamic weight distribution'
+        ],
+        deploy: 'Immediate quick-grab on alert. Direct hookup to breathing and vital telemetry systems.',
+        security: 'Flame-retardant fabric impervious to toxic chemical and biological agents.'
+      }
+    }
+  };
+
+  var pmOverlay = document.getElementById('productModalOverlay');
+  var pmClose = document.getElementById('productModalClose');
+  var pmBtnCancel = document.getElementById('pmBtnCancel');
+  var pmCtaDemo = document.getElementById('pmCtaDemo');
+  var activeProductKey = 'p1';
+
+  function openProductModal(pid) {
+    var curLang = lang || 'fr';
+    var dict = PRODUCT_DATA[curLang] || PRODUCT_DATA.fr;
+    var data = dict[pid];
+    if (!data || !pmOverlay) return;
+    activeProductKey = pid;
+
+    document.getElementById('pmTag').textContent = data.tag;
+    document.getElementById('pmTitle').textContent = data.name;
+    document.getElementById('pmDesc').textContent = data.desc;
+    document.getElementById('pmImage').src = data.img;
+    document.getElementById('pmHudCert').textContent = data.cert;
+
+    var specsList = document.getElementById('pmSpecsList');
+    specsList.innerHTML = '';
+    for (var s = 0; s < data.specs.length; s++) {
+      var li = document.createElement('li');
+      li.textContent = data.specs[s];
+      specsList.appendChild(li);
+    }
+    document.getElementById('pmDeployTxt').textContent = data.deploy;
+    document.getElementById('pmSecurityTxt').textContent = data.security;
+
+    // Reset tabs
+    var pmTabs = pmOverlay.querySelectorAll('.pm-tab');
+    for (var t = 0; t < pmTabs.length; t++) pmTabs[t].classList.remove('active');
+    if (pmTabs[0]) pmTabs[0].classList.add('active');
+    document.getElementById('pmPaneSpecs').style.display = 'block';
+    document.getElementById('pmPaneDeployment').style.display = 'none';
+    document.getElementById('pmPaneSecurity').style.display = 'none';
+
+    pmOverlay.classList.add('open');
+    pmOverlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeProductModal() {
+    if (!pmOverlay) return;
+    pmOverlay.classList.remove('open');
+    pmOverlay.setAttribute('aria-hidden', 'true');
+  }
+
+  if (pmClose) pmClose.addEventListener('click', closeProductModal);
+  if (pmBtnCancel) pmBtnCancel.addEventListener('click', closeProductModal);
+  if (pmOverlay) {
+    pmOverlay.addEventListener('click', function(e) {
+      if (e.target === this) closeProductModal();
+    });
+  }
+
+  // Hook product detail triggers
+  var detailTriggers = document.querySelectorAll('.p-detail-trigger');
+  for (var dt = 0; dt < detailTriggers.length; dt++) {
+    detailTriggers[dt].addEventListener('click', function(e) {
+      e.preventDefault();
+      var pid = this.getAttribute('data-product-id');
+      openProductModal(pid);
+    });
+  }
+
+  // Switch tabs in product modal
+  var pmTabsList = document.querySelectorAll('.pm-tab');
+  for (var pt = 0; pt < pmTabsList.length; pt++) {
+    pmTabsList[pt].addEventListener('click', function() {
+      for (var p = 0; p < pmTabsList.length; p++) pmTabsList[p].classList.remove('active');
+      this.classList.add('active');
+      var ptab = this.getAttribute('data-ptab');
+      document.getElementById('pmPaneSpecs').style.display = (ptab === 'specs') ? 'block' : 'none';
+      document.getElementById('pmPaneDeployment').style.display = (ptab === 'deployment') ? 'block' : 'none';
+      document.getElementById('pmPaneSecurity').style.display = (ptab === 'security') ? 'block' : 'none';
+    });
+  }
+
+  // CTA demo from product modal pre-selects select option in demo modal
+  if (pmCtaDemo) {
+    pmCtaDemo.addEventListener('click', function() {
+      closeProductModal();
+      var usecaseSelect = document.getElementById('usecase');
+      if (usecaseSelect) {
+        if (activeProductKey === 'p1') usecaseSelect.selectedIndex = 0;
+        else if (activeProductKey === 'p2' || activeProductKey === 'p3') usecaseSelect.selectedIndex = 1;
+        else usecaseSelect.selectedIndex = 2;
+      }
+      openModal();
+    });
+  }
+
+  /* =====================================================================
+     INTERACTIVE ARCHITECTURE ACCORDION
+     ===================================================================== */
+  var layerAccordions = document.querySelectorAll('.layer-accordion');
+  for (var la = 0; la < layerAccordions.length; la++) {
+    layerAccordions[la].addEventListener('click', function() {
+      var isOpen = this.classList.contains('open');
+      for (var l = 0; l < layerAccordions.length; l++) {
+        layerAccordions[l].classList.remove('open');
+        layerAccordions[l].setAttribute('aria-expanded', 'false');
+      }
+      if (!isOpen) {
+        this.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+    // Keyboard accessibility
+    layerAccordions[la].addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  }
+
+  /* =====================================================================
+     INTERACTIVE JCYBER PHONE
+     ===================================================================== */
+  var cpScanBtn = document.getElementById('cpScanBtn');
+  var cpScanTxt = document.getElementById('cpScanTxt');
+  var cpScoreVal = document.getElementById('cpScoreVal');
+  var cpFeed = document.getElementById('cpFeed');
+  var cpChips = document.querySelectorAll('.cp-chip');
+  var cpNavDots = document.querySelectorAll('.cp-nav-dot');
+
+  // 1. Scan button
+  if (cpScanBtn) {
+    cpScanBtn.addEventListener('click', function() {
+      if (cpScanBtn.disabled) return;
+      cpScanBtn.disabled = true;
+      var origText = cpScanTxt.textContent;
+      cpScanTxt.textContent = (lang === 'fr') ? 'Scan de zone en cours...' : 'Scanning area...';
+      cpScanBtn.style.opacity = '0.7';
+
+      setTimeout(function() {
+        if (cpScoreVal) cpScoreVal.textContent = '99';
+        if (cpFeed) {
+          var newItem = document.createElement('div');
+          newItem.className = 'cp-feed-item';
+          newItem.innerHTML = '<span class="dot"></span><span>' + ((lang === 'fr') ? 'Scan terminé — 0 anomalie' : 'Scan complete — 0 threats') + '</span>';
+          cpFeed.insertBefore(newItem, cpFeed.firstChild);
+        }
+        cpScanTxt.textContent = (lang === 'fr') ? '✔ Périmètre sécurisé' : '✔ Perimeter secured';
+        cpScanBtn.style.background = 'rgba(127,213,155,0.25)';
+
+        setTimeout(function() {
+          cpScanTxt.textContent = origText;
+          cpScanBtn.disabled = false;
+          cpScanBtn.style.opacity = '';
+          cpScanBtn.style.background = '';
+        }, 3000);
+      }, 1200);
+    });
+  }
+
+  // 2. Clickable chips
+  for (var ch = 0; ch < cpChips.length; ch++) {
+    cpChips[ch].addEventListener('click', function() {
+      var isNowOn = !this.classList.contains('on');
+      this.classList.toggle('on');
+      this.setAttribute('aria-pressed', isNowOn ? 'true' : 'false');
+      var chipType = this.getAttribute('data-chip');
+
+      if (chipType === 'vpn') {
+        if (cpScoreVal) cpScoreVal.textContent = isNowOn ? '95' : '74';
+      } else if (chipType === 'scram') {
+        document.body.classList.toggle('scram-mode', isNowOn);
+      }
+    });
+  }
+
+  // 3. Phone navigation tabs
+  for (var nd = 0; nd < cpNavDots.length; nd++) {
+    cpNavDots[nd].addEventListener('click', function() {
+      for (var d = 0; d < cpNavDots.length; d++) cpNavDots[d].classList.remove('active');
+      this.classList.add('active');
+      var tab = this.getAttribute('data-tab');
+
+      var dashEl = document.getElementById('cpScreenDash');
+      var radarEl2 = document.getElementById('cpScreenRadar');
+      var cryptEl = document.getElementById('cpScreenCrypt');
+
+      if (dashEl) dashEl.style.display = (tab === 'dash') ? 'block' : 'none';
+      if (radarEl2) radarEl2.style.display = (tab === 'radar') ? 'block' : 'none';
+      if (cryptEl) cryptEl.style.display = (tab === 'crypt') ? 'block' : 'none';
+    });
+  }
+
+  /* =====================================================================
+     INTERACTIVE JINIM LAB SIMULATOR
+     ===================================================================== */
+  var labRows = document.querySelectorAll('.lab-row');
+  var lscTxt = document.getElementById('lscTxt');
+  var lscStat = document.getElementById('lscStat');
+  var labRunBtn = document.getElementById('labRunBtn');
+  var labRunTxt = document.getElementById('labRunTxt');
+
+  var courseTitles = {
+    1: 'Cyberdéfense — niveau 1',
+    2: 'Pilotage drone ISR',
+    3: 'Électronique & drones',
+    4: 'Secourisme tactique'
+  };
+
+  for (var lr = 0; lr < labRows.length; lr++) {
+    labRows[lr].addEventListener('click', function() {
+      for (var r = 0; r < labRows.length; r++) labRows[r].classList.remove('active');
+      this.classList.add('active');
+      var cId = this.getAttribute('data-course');
+      if (lscTxt) lscTxt.textContent = 'Module actif : ' + (courseTitles[cId] || 'Formation');
+      if (lscStat) lscStat.textContent = '[SYNCHRONISÉ] Simulateur prêt · Cliquez pour lancer l\'exercice';
+    });
+  }
+
+  if (labRunBtn) {
+    labRunBtn.addEventListener('click', function() {
+      if (labRunBtn.disabled) return;
+      labRunBtn.disabled = true;
+      var activeRow = document.querySelector('.lab-row.active') || labRows[0];
+      if (labRunTxt) labRunTxt.textContent = 'Simulation en cours...';
+
+      if (lscStat) lscStat.textContent = '[EXÉCUTION] Évaluation des compétences en temps réel...';
+
+      setTimeout(function() {
+        if (activeRow) {
+          var progEl = activeRow.querySelector('.lab-prog');
+          var valEl = activeRow.querySelector('.lab-val');
+          var currentVal = parseInt(valEl.textContent) || 50;
+          var newVal = Math.min(100, currentVal + 5);
+          if (progEl) progEl.style.setProperty('--p', newVal + '%');
+          if (valEl) valEl.textContent = newVal + ' %';
+        }
+        if (lscStat) lscStat.textContent = '✔ [SUCCÈS] Exercice validé avec mention ! +5% acquis';
+        if (labRunTxt) labRunTxt.textContent = '✔ Exercice validé';
+
+        setTimeout(function() {
+          labRunBtn.disabled = false;
+          if (labRunTxt) labRunTxt.textContent = (lang === 'fr') ? '▶ Lancer l\'exercice' : '▶ Run exercise';
+        }, 2500);
+      }, 1000);
+    });
+  }
+
+  /* =====================================================================
+     INTERACTIVE ECO-TAGS
+     ===================================================================== */
+  var ecoTags = document.querySelectorAll('.eco-tag');
+  for (var et = 0; et < ecoTags.length; et++) {
+    ecoTags[et].addEventListener('click', function() {
+      this.classList.toggle('on');
+    });
+  }
 
 })();
